@@ -4,13 +4,22 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.thelatenightstudio.favi.databinding.ActivityHomeBinding
+import java.nio.charset.Charset
+import java.security.KeyStore
+import java.util.*
+import javax.crypto.Cipher
+import javax.crypto.KeyGenerator
+import javax.crypto.SecretKey
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,36 +27,53 @@ class HomeActivity : AppCompatActivity() {
         private val TAG = HomeActivity::class.java.simpleName
 
         private const val REQUEST_CODE = 101
+        private const val AUTH_KEY = "auth_key"
     }
 
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var biometricPrompt: BiometricPrompt
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        generateSecretKey(
+            KeyGenParameterSpec.Builder(
+                AUTH_KEY,
+                KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+            )
+                .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                .setUserAuthenticationRequired(true)
+                // Invalidate the keys if the user has registered a new biometric
+                // credential, such as a new fingerprint. Can call this method only
+                // on Android 7.0 (API level 24) or higher. The variable
+                // "invalidatedByBiometricEnrollment" is true by default.
+                .setInvalidatedByBiometricEnrollment(true)
+                .build()
+        )
+
         biometricPrompt = createBiometricPrompt()
 
         binding.btnBiometric.setOnClickListener {
-            val promptInfo = createPromptInfo()
+            val cipher = getCipher()
+            val secretKey = getSecretKey()
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey)
 
-//            if (BiometricManager.from(context)
-//                    .canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
-//            ) {
-//                biometricPrompt.authenticate(promptInfo)
-//            } else {
-//                loginWithPassword()
-//            }
+            val promptInfo = createPromptInfo()
 
             val biometricManager = BiometricManager.from(this)
             when (biometricManager.canAuthenticate(BIOMETRIC_STRONG)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> {
                     Log.d(TAG, "App can authenticate using biometrics.")
 
-                    biometricPrompt.authenticate(promptInfo)
+                    biometricPrompt.authenticate(
+                        promptInfo,
+                        BiometricPrompt.CryptoObject(cipher)
+                    )
                 }
 
                 BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
@@ -102,7 +128,16 @@ class HomeActivity : AppCompatActivity() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
 
-                Log.d(TAG, "Authentication was successful")
+                val message = "This is a secret message so don't tell anyone!"
+                val encryptedInfo: ByteArray? = result.cryptoObject?.cipher?.doFinal(
+                    message.toByteArray(Charset.defaultCharset())
+
+                )
+
+                Log.d(
+                    TAG, "Encrypted information: " +
+                            encryptedInfo.contentToString()
+                )
                 // Proceed with viewing the private encrypted message.
                 //showEncryptedMessage(result.cryptoObject)
 
@@ -122,9 +157,36 @@ class HomeActivity : AppCompatActivity() {
             .setDescription(getString(R.string.prompt_info_description))
             // Authenticate without requiring the user to press a "confirm"
             // button after satisfying the biometric check
+            .setAllowedAuthenticators(BIOMETRIC_STRONG)
             .setConfirmationRequired(false)
             .setNegativeButtonText(getString(R.string.prompt_info_use_app_password))
             .build()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun generateSecretKey(keyGenParameterSpec: KeyGenParameterSpec) {
+        val keyGenerator = KeyGenerator.getInstance(
+            KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore"
+        )
+        keyGenerator.init(keyGenParameterSpec)
+        keyGenerator.generateKey()
+    }
+
+    private fun getSecretKey(): SecretKey {
+        val keyStore = KeyStore.getInstance("AndroidKeyStore")
+
+        // Before the keystore can be accessed, it must be loaded.
+        keyStore.load(null)
+        return keyStore.getKey(AUTH_KEY, null) as SecretKey
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getCipher(): Cipher {
+        return Cipher.getInstance(
+            KeyProperties.KEY_ALGORITHM_AES + "/"
+                    + KeyProperties.BLOCK_MODE_CBC + "/"
+                    + KeyProperties.ENCRYPTION_PADDING_PKCS7
+        )
     }
 
 }
