@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FaviPrototype</string>
+    <string name="prompt_info_title">This is a title</string>
+    <string name="prompt_info_subtitle">This is a subtitle</string>
+    <string name="prompt_info_description">This is a description</string>
+    <string name="prompt_info_use_app_password">This is a text for negative button</string>
+    <string name="biometric_auth_test">Biometric auth test</string>
+    <string name="biometric_berhasil">Biometric berhasil</string>
+</resources>
