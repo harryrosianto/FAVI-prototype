@@ -48,4 +48,7 @@ dependencies {
 
     //authentication
     implementation "androidx.biometric:biometric:1.1.0"
+
+    //di
+    implementation "io.insert-koin:koin-android:3.0.1"
 }
