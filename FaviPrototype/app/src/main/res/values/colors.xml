@@ -7,4 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light Mode Only Color Palette -->
+    <color name="green_900_light">#FF4c8c4a</color>
+    <color name="green_900_medium">#FF1b5e20</color>
+    <color name="green_900_dark">#FF003300</color>
+
+    <!-- Night Mode Only Color Palette -->
+    <color name="green_400_light">#FF98ee99</color>
+    <color name="green_400_medium">#FF66bb6a</color>
+    <color name="green_400_dark">#FF338a3e</color>
+
+    <!-- Universal Color Palette -->
+    <color name="cyan_500_light">#FF62efff</color>
+    <color name="cyan_500_medium">#FF00bcd4</color>
+    <color name="cyan_500_dark">#FF008ba3</color>
+
 </resources>

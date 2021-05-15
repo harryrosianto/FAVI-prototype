@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thelatenightstudio.favi">
 
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!--Enable Biometric Usage-->
+
     <application
         android:name=".di.FaviApplication"
         android:allowBackup="true"
