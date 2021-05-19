@@ -9,18 +9,18 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Light Mode Only Color Palette -->
-    <color name="green_900_light">#FF4c8c4a</color>
-    <color name="green_900_medium">#FF1b5e20</color>
-    <color name="green_900_dark">#FF003300</color>
+    <color name="teal_700_light">#FF48a999</color>
+    <color name="teal_700_medium">#FF00796b</color>
+    <color name="teal_700_dark">#FF004c40</color>
 
     <!-- Night Mode Only Color Palette -->
-    <color name="green_400_light">#FF98ee99</color>
-    <color name="green_400_medium">#FF66bb6a</color>
-    <color name="green_400_dark">#FF338a3e</color>
+    <color name="green_200_light">#FFd7ffd9</color>
+    <color name="green_200_medium">#FFa5d6a7</color>
+    <color name="green_200_dark">#FF75a478</color>
 
     <!-- Universal Color Palette -->
-    <color name="cyan_500_light">#FF62efff</color>
-    <color name="cyan_500_medium">#FF00bcd4</color>
-    <color name="cyan_500_dark">#FF008ba3</color>
+    <color name="red_300_light">#FFffa4a2</color>
+    <color name="red_300_medium">#FFe57373</color>
+    <color name="red_300_dark">#FFaf4448</color>
 
 </resources>

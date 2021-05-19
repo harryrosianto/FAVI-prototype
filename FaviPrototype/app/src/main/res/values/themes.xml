@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.FaviPrototype" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green_900_medium</item>
-        <item name="colorPrimaryVariant">@color/green_900_dark</item>
+        <item name="colorPrimary">@color/teal_700_medium</item>
+        <item name="colorPrimaryVariant">@color/teal_700_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/cyan_500_light</item>
-        <item name="colorSecondaryVariant">@color/cyan_500_dark</item>
+        <item name="colorSecondary">@color/red_300_light</item>
+        <item name="colorSecondaryVariant">@color/red_300_dark</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
