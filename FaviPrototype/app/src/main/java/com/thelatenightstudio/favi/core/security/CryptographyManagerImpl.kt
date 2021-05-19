@@ -1,4 +1,4 @@
-package com.thelatenightstudio.favi.security
+package com.thelatenightstudio.favi.core.security
 
 import android.os.Build
 import android.security.keystore.KeyGenParameterSpec

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "687067392818",
+    "project_id": "faviprototype",
+    "storage_bucket": "faviprototype.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687067392818:android:f803ba421ed13d468c452b",
+        "android_client_info": {
+          "package_name": "com.thelatenightstudio.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687067392818-m86kh2crelrh547vqguoo19g381lcj22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtRPPt0xcqsUF0-VvUc7We0B58Of-7nMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687067392818-m86kh2crelrh547vqguoo19g381lcj22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.thelatenightstudio.favi.security
+package com.thelatenightstudio.favi.core.security
 
 data class EncryptedData(
     val ciphertext: ByteArray,

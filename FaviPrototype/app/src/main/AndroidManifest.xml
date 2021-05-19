@@ -2,18 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thelatenightstudio.favi">
 
-    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!--Enable Biometric Usage-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
-        android:name=".di.FaviApplication"
+        android:name=".FaviApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".HomeActivity">
+        <activity
+            android:name=".signup.SignUpActivity"
+            android:label="@string/sign_up" />
+        <activity android:name=".ui.SecondActivity" />
+        <activity android:name=".ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

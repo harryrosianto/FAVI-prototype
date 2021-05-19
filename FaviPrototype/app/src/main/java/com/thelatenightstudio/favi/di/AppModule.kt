@@ -1,13 +1,15 @@
 package com.thelatenightstudio.favi.di
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.thelatenightstudio.favi.security.CryptographyManager
-import com.thelatenightstudio.favi.security.CryptographyManagerImpl
+import com.thelatenightstudio.favi.core.domain.usecase.FaviInteractor
+import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
+import com.thelatenightstudio.favi.signup.SignUpViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-@RequiresApi(Build.VERSION_CODES.M)
-@JvmField
-val appModule = module {
-    factory<CryptographyManager> { CryptographyManagerImpl() }
+val useCaseModule = module {
+    factory<FaviUseCase> { FaviInteractor(get()) }
+}
+
+val viewModelModule = module {
+    viewModel { SignUpViewModel(get()) }
 }

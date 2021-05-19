@@ -9,4 +9,16 @@
     <string name="encryption_test">Encryption test</string>
     <string name="decryption_test">Decryption test</string>
     <string name="secret_key_name">biometric_secret_key</string>
+    <string name="sign_up_test">Sign Up Test</string>
+    <string name="sign_in_test">Sign In Test</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="error">Error!</string>
+    <string name="empty">Empty!</string>
+    <string name="no_internet">You\'re not connected to the internet!</string>
+    <string name="email_not_valid">Email format is not valid!</string>
+    <string name="password_not_valid">Password is less than 8 characters!</string>
+    <string name="password_not_same">The passwords are different!</string>
 </resources>
