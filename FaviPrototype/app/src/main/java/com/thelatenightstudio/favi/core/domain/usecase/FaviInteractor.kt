@@ -9,4 +9,7 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     override fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>> =
         faviRepository.createUser(email, password)
 
+    override fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>> =
+        faviRepository.signIn(email, password)
+
 }

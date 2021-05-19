@@ -29,4 +29,20 @@ class RemoteDataSource(private val firebaseAuth: FirebaseAuth) {
             awaitClose { }
         }.flowOn(Dispatchers.IO)
 
+    @ExperimentalCoroutinesApi
+    fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>> =
+        callbackFlow {
+            val callback =
+                OnCompleteListener<AuthResult> { task ->
+                    if (task.isSuccessful)
+                        trySend(ApiResponse.Success(task.isSuccessful))
+                    else trySend(ApiResponse.Error(task.exception?.message))
+                }
+
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(callback)
+
+            awaitClose { }
+        }.flowOn(Dispatchers.IO)
+
 }

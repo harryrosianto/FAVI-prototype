@@ -12,8 +12,9 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.thelatenightstudio.favi.R
-import com.thelatenightstudio.favi.databinding.ActivityHomeBinding
 import com.thelatenightstudio.favi.core.security.CryptographyManager
+import com.thelatenightstudio.favi.databinding.ActivityHomeBinding
+import com.thelatenightstudio.favi.signin.SignInActivity
 import com.thelatenightstudio.favi.signup.SignUpActivity
 import org.koin.android.ext.android.inject
 import java.nio.charset.Charset
@@ -54,6 +55,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnSignIn.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
     }

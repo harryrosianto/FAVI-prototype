@@ -1,6 +1,7 @@
-package com.thelatenightstudio.favi.signup
+package com.thelatenightstudio.favi.signin
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,23 +12,24 @@ import com.thelatenightstudio.favi.core.utils.AppCoroutineScopes
 import com.thelatenightstudio.favi.core.utils.EditTextHelper
 import com.thelatenightstudio.favi.core.utils.InternetHelper
 import com.thelatenightstudio.favi.core.utils.ObservableHelper
-import com.thelatenightstudio.favi.databinding.ActivitySignUpBinding
+import com.thelatenightstudio.favi.databinding.ActivitySignInBinding
+import com.thelatenightstudio.favi.ui.SecondActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SignUpActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var binding: ActivitySignInBinding
 
-    private val viewModel: SignUpViewModel by viewModel()
+    private val viewModel: SignInViewModel by viewModel()
     private val scopes: AppCoroutineScopes by inject()
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val emailStream =
@@ -50,24 +52,10 @@ class SignUpActivity : AppCompatActivity() {
             )
         }
 
-        val passwordConfirmationStream =
-            ObservableHelper.getPasswordConfirmationStream(
-                binding.edPassword,
-                binding.edConfirmPassword
-            )
-        passwordConfirmationStream.subscribe {
-            EditTextHelper.showEditTextExistAlert(
-                binding.edConfirmPassword,
-                it,
-                getString(R.string.password_not_same)
-            )
-        }
-
         val invalidFieldsStream =
             ObservableHelper.getInvalidFieldsStream(
                 emailStream,
-                passwordStream,
-                passwordConfirmationStream
+                passwordStream
             )
         invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
 
@@ -78,10 +66,10 @@ class SignUpActivity : AppCompatActivity() {
                 val email = binding.edEmail.text.toString()
                 val password = binding.edPassword.text.toString()
 
-                viewModel.createUser(email, password).observe(this, { response ->
+                viewModel.signIn(email, password).observe(this, { response ->
                     val toastText = when (response) {
                         is ApiResponse.Success -> {
-                            resources.getString(R.string.account_created)
+                            resources.getString(R.string.successful)
                         }
                         is ApiResponse.Error -> {
                             response.errorMessage
@@ -101,7 +89,9 @@ class SignUpActivity : AppCompatActivity() {
                     scopes.main().launch {
                         delay(1000)
                         if (response is ApiResponse.Success) {
-                            onBackPressed()
+                            val intent = Intent(this@SignInActivity, SecondActivity::class.java)
+                            intent.putExtra(SecondActivity.EXTRA_STRING, "SIGN IN BERHASIL")
+                            startActivity(intent)
                         }
                     }
                 })

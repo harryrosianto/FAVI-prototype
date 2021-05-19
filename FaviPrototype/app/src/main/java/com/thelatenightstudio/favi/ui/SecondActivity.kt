@@ -2,11 +2,24 @@ package com.thelatenightstudio.favi.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.thelatenightstudio.favi.R
+import com.thelatenightstudio.favi.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXTRA_STRING = "extra_string"
+    }
+
+    private lateinit var binding: ActivitySecondBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        binding = ActivitySecondBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (intent.extras != null) {
+            val text = intent.getStringExtra(EXTRA_STRING)
+            binding.textView.text = text
+        }
     }
 }

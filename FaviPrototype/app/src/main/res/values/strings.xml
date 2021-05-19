@@ -21,4 +21,7 @@
     <string name="email_not_valid">Email format is not valid!</string>
     <string name="password_not_valid">Password is less than 8 characters!</string>
     <string name="password_not_same">The passwords are different!</string>
+    <string name="sign_in">Sign In</string>
+    <string name="account_created">Account is successfully created!</string>
+    <string name="successful">Successful!</string>
 </resources>

@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
         <activity
+            android:name=".signin.SignInActivity"
+            android:label="@string/sign_in" />
+        <activity
             android:name=".signup.SignUpActivity"
             android:label="@string/sign_up" />
         <activity android:name=".ui.SecondActivity" />

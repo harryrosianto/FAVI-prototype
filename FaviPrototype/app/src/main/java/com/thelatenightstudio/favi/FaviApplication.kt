@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import com.thelatenightstudio.favi.core.di.networkModule
 import com.thelatenightstudio.favi.core.di.repositoryModule
 import com.thelatenightstudio.favi.core.di.securityModule
+import com.thelatenightstudio.favi.di.asyncModule
 import com.thelatenightstudio.favi.di.useCaseModule
 import com.thelatenightstudio.favi.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -28,7 +29,8 @@ class FaviApplication : Application() {
                     repositoryModule,
                     securityModule,
                     useCaseModule,
-                    viewModelModule
+                    viewModelModule,
+                    asyncModule
                 )
             )
         }

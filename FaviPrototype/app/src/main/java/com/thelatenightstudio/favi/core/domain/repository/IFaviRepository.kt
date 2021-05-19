@@ -7,4 +7,6 @@ interface IFaviRepository {
 
     fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>>
 
+    fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
+
 }
