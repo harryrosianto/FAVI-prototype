@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FaviPrototype</string>
+    <string name="lorem_ipsum">Lorem Ipsum Dolor Sit Amet</string>
     <string name="prompt_info_use_app_password">This is a text for negative button</string>
     <string name="biometric_berhasil">Biometric berhasil</string>
     <string name="encryption_test">Encryption test</string>
@@ -30,4 +31,5 @@
     <string name="biometric_error_none_enrolled">Please setup your biometric first</string>
     <string name="biometric_auth_is_off">Please activate biometric sign in from the main menu first!</string>
     <string name="activate_biometric_sign_in">Activate Biometric Sign In</string>
+    <string name="cd_aktfikan_fitur_sidik_jari">Aktfikan Fitur Sidik Jari</string>
 </resources>
