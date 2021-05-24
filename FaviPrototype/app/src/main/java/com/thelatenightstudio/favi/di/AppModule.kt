@@ -2,9 +2,9 @@ package com.thelatenightstudio.favi.di
 
 import com.thelatenightstudio.favi.core.domain.usecase.FaviInteractor
 import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
-import com.thelatenightstudio.favi.core.utils.AppCoroutineScopes
 import com.thelatenightstudio.favi.signin.SignInViewModel
 import com.thelatenightstudio.favi.signup.SignUpViewModel
+import com.thelatenightstudio.favi.ui.MainMenuViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -15,8 +15,5 @@ val useCaseModule = module {
 val viewModelModule = module {
     viewModel { SignUpViewModel(get()) }
     viewModel { SignInViewModel(get()) }
-}
-
-val asyncModule = module {
-    factory { AppCoroutineScopes() }
+    viewModel { MainMenuViewModel(get()) }
 }

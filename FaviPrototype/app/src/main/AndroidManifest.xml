@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.thelatenightstudio.favi">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+    <uses-sdk tools:overrideLibrary="androidx.security"/>
 
     <application
         android:name=".FaviApplication"
@@ -19,7 +22,7 @@
         <activity
             android:name=".signup.SignUpActivity"
             android:label="@string/sign_up" />
-        <activity android:name=".ui.SecondActivity" />
+        <activity android:name=".ui.MainMenuActivity" />
         <activity android:name=".ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

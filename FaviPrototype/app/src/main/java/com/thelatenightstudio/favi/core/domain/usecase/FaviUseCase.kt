@@ -9,4 +9,10 @@ interface FaviUseCase {
 
     fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
 
+    fun signOut()
+
+    fun getIdToken(): Flow<ApiResponse<String>>
+
+    fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
+
 }

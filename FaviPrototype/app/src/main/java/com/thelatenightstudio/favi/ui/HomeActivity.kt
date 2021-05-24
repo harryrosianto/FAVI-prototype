@@ -101,13 +101,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun createPromptInfo(): BiometricPrompt.PromptInfo {
         return BiometricPrompt.PromptInfo.Builder()
-            .setTitle(getString(R.string.prompt_info_title))
-            .setSubtitle(getString(R.string.prompt_info_subtitle))
-            .setDescription(getString(R.string.prompt_info_description))
+            .setTitle(getString(R.string.sign_in_with_biometric))
+            .setSubtitle(getString(R.string.biometric_auth))
 
             .setAllowedAuthenticators(BIOMETRIC_STRONG)
-            // Authenticate without requiring the user to press a "confirm"
-            // button after satisfying the biometric check
+            // Authenticate without requiring the user to press a "confirm" button after satisfying the biometric check
             .setConfirmationRequired(false)
             .setNegativeButtonText(getString(R.string.prompt_info_use_app_password))
             .build()

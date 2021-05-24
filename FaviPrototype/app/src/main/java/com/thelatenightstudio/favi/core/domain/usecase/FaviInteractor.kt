@@ -12,4 +12,14 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     override fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>> =
         faviRepository.signIn(email, password)
 
+    override fun signOut() {
+        faviRepository.signOut()
+    }
+
+    override fun getIdToken(): Flow<ApiResponse<String>> =
+        faviRepository.getIdToken()
+
+    override fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>> =
+        faviRepository.signInWithCustomToken(token)
+
 }

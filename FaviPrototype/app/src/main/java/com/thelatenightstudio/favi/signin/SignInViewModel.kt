@@ -11,4 +11,7 @@ class SignInViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
     fun signIn(email: String, password: String): LiveData<ApiResponse<Boolean>> =
         faviUseCase.signIn(email, password).asLiveData()
 
+    fun signInWithCustomToken(token: String): LiveData<ApiResponse<Boolean>> =
+        faviUseCase.signInWithCustomToken(token).asLiveData()
+
 }

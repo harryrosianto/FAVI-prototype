@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">FaviPrototype</string>
-    <string name="prompt_info_title">This is a title</string>
-    <string name="prompt_info_subtitle">This is a subtitle</string>
-    <string name="prompt_info_description">This is a description</string>
     <string name="prompt_info_use_app_password">This is a text for negative button</string>
-    <string name="biometric_auth_test">Biometric auth test</string>
     <string name="biometric_berhasil">Biometric berhasil</string>
     <string name="encryption_test">Encryption test</string>
     <string name="decryption_test">Decryption test</string>
@@ -24,4 +20,14 @@
     <string name="sign_in">Sign In</string>
     <string name="account_created">Account is successfully created!</string>
     <string name="successful">Successful!</string>
+    <string name="sign_in_with_biometric">Sign In with Biometric</string>
+    <string name="failed">Failed!</string>
+    <string name="biometric_error">Please sign in with your email and password instead</string>
+    <string name="biometric_auth">Please complete the authentication</string>
+    <string name="biometric_error_button">Sign in with email instead</string>
+    <string name="biometric_error_no_hardware">No biometric features available on this device</string>
+    <string name="biometric_error_hw_unavailable">Biometric features are currently unavailable</string>
+    <string name="biometric_error_none_enrolled">Please setup your biometric first</string>
+    <string name="biometric_auth_is_off">Please activate biometric sign in from the main menu first!</string>
+    <string name="activate_biometric_sign_in">Activate Biometric Sign In</string>
 </resources>

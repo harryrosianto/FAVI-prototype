@@ -16,4 +16,16 @@ class FaviRepository(private val remoteDataSource: RemoteDataSource) : IFaviRepo
     override fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>> =
         remoteDataSource.signIn(email, password)
 
+    override fun signOut() {
+        remoteDataSource.signOut()
+    }
+
+    @ExperimentalCoroutinesApi
+    override fun getIdToken(): Flow<ApiResponse<String>> =
+        remoteDataSource.getIdToken()
+
+    @ExperimentalCoroutinesApi
+    override fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>> =
+        remoteDataSource.signInWithCustomToken(token)
+
 }
