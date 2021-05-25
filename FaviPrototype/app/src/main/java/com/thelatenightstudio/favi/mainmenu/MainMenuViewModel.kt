@@ -5,12 +5,11 @@ import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
 
 class MainMenuViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
 
-    fun signOut() {
+    suspend fun signOut() {
         faviUseCase.signOut()
     }
 
-    fun activateBiometric(){
+    suspend fun activateBiometric(): Boolean =
         faviUseCase.activateBiometric()
-    }
 
 }

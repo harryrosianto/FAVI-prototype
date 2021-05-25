@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.thelatenightstudio.favi">
 
+    <uses-sdk tools:overrideLibrary="androidx.security" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-
-    <uses-sdk tools:overrideLibrary="androidx.security"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".FaviApplication"
@@ -16,6 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
+        <activity
+            android:name=".voicerecording.VoiceRecordingActivity"
+            android:label="@string/voice_recording" />
         <activity
             android:name=".signin.SignInActivity"
             android:label="@string/sign_in" />

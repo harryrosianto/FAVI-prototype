@@ -3,6 +3,7 @@ package com.thelatenightstudio.favi
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.thelatenightstudio.favi.core.di.mediaModule
 import com.thelatenightstudio.favi.core.di.networkModule
 import com.thelatenightstudio.favi.core.di.repositoryModule
 import com.thelatenightstudio.favi.core.di.securityModule
@@ -30,7 +31,8 @@ class FaviApplication : Application() {
                     securityModule,
                     useCaseModule,
                     viewModelModule,
-                    biometricModule
+                    biometricModule,
+                    mediaModule
                 )
             )
         }

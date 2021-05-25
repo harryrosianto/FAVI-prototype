@@ -1,10 +1,12 @@
 package com.thelatenightstudio.favi.signin
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
+import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
@@ -14,6 +16,12 @@ import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
 import com.thelatenightstudio.favi.core.utils.ObserverHelper.getSignInObserver
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignInBinding
+import com.thelatenightstudio.favi.voicerecording.VoiceRecordingActivity
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.invoke
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -57,6 +65,11 @@ class SignInActivity : AppCompatActivity() {
             )
         }
 
+        binding.btnVoice.setOnClickListener {
+            val intent = Intent(this, VoiceRecordingActivity::class.java)
+            startActivity(intent)
+        }
+
         val emailStream = getEmailStream(binding.edEmail)
         emailStream.subscribe {
             showEditTextExistAlert(
@@ -76,20 +89,27 @@ class SignInActivity : AppCompatActivity() {
         }
 
         val invalidFieldsStream = getInvalidFieldsStream(emailStream, passwordStream)
-        invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
+        invalidFieldsStream.subscribe { isValid -> binding.btnSignIn.isEnabled = isValid }
 
-        binding.btnSignUp.setOnClickListener {
-            if (isConnected()) {
-                binding.progressBar.visibility = View.VISIBLE
+        binding.btnSignIn.setOnClickListener {
+            lifecycleScope.launch(Default) {
+                if (isConnected()) {
+                    (Main){
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
 
-                val email = binding.edEmail.text.toString()
-                val password = binding.edPassword.text.toString()
+                    val email = binding.edEmail.text.toString()
+                    val password = binding.edPassword.text.toString()
 
-                viewModel.signIn(email, password).observe(
-                    this, getSignInObserver(this, resources, binding)
-                )
-            } else {
-                showToast(this, getString(R.string.no_internet))
+                    (Main){
+                        (IO){ viewModel.signIn(email, password) }
+                            .observe(this@SignInActivity,
+                                (Default){ getSignInObserver(binding) }
+                            )
+                    }
+                } else {
+                    showToast(getString(R.string.no_internet))
+                }
             }
         }
     }

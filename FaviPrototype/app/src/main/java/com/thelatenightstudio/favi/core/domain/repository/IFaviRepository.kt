@@ -5,26 +5,26 @@ import kotlinx.coroutines.flow.Flow
 
 interface IFaviRepository {
 
-    fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>>
+    suspend fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>>
 
-    fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
+    suspend fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
 
-    fun signOut()
+    suspend fun signOut()
 
-    fun getIdToken(): Flow<ApiResponse<String>>
+    suspend fun getIdToken(): Flow<ApiResponse<String>>
 
-    fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
+    suspend fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
 
-    fun getEmailFromSharedPref(): String
+    suspend fun getEmailFromSharedPref(): String
 
-    fun getPasswordFromSharedPref(): String
+    suspend fun getPasswordFromSharedPref(): String
 
-    fun getBiometricAuthFromSharedPref(): Boolean
+    suspend fun getBiometricAuthFromSharedPref(): Boolean
 
-    fun saveTemporaryCredentialsToSharedPref(email: String, password: String)
+    suspend fun saveTemporaryCredentialsToSharedPref(email: String, password: String)
 
-    fun deleteTemporaryCredentialsFromSharedPref()
+    suspend fun deleteTemporaryCredentialsFromSharedPref()
 
-    fun activateBiometric()
+    suspend fun activateBiometric(): Boolean
 
 }

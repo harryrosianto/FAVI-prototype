@@ -3,8 +3,8 @@ package com.thelatenightstudio.favi.signup
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
@@ -14,9 +14,12 @@ import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getInvalidFieldsStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordConfirmationStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
+import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignUpBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpActivity : AppCompatActivity() {
@@ -75,47 +78,50 @@ class SignUpActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
 
         binding.btnSignUp.setOnClickListener {
-            if (isConnected()) {
-                binding.progressBar.visibility = View.VISIBLE
-
-                val email = binding.edEmail.text.toString()
-                val password = binding.edPassword.text.toString()
-
-                viewModel.createUser(email, password).observe(this, { response ->
-                    val toastText = when (response) {
-                        is ApiResponse.Success -> {
-                            getString(R.string.account_created)
-                        }
-                        is ApiResponse.Error -> {
-                            response.errorMessage
-                                ?: getString(R.string.error)
-                        }
-                        is ApiResponse.Empty -> {
-                            getString(R.string.empty)
-                        }
+            lifecycleScope.launch(Default) {
+                if (isConnected()) {
+                    (Main) {
+                        binding.progressBar.visibility = View.VISIBLE
                     }
-                    Toast.makeText(
-                        this,
-                        toastText,
-                        Toast.LENGTH_SHORT
-                    ).show()
 
-                    binding.progressBar.visibility = View.GONE
-                    lifecycleScope.launch {
-                        delay(1000)
-                        if (response is ApiResponse.Success) {
-                            onBackPressed()
-                        }
+                    val email = binding.edEmail.text.toString()
+                    val password = binding.edPassword.text.toString()
+
+                    (Main) {
+                        (IO) { viewModel.createUser(email, password) }
+                            .observe(this@SignUpActivity,
+                                (Default) { getCreateUserObservable() })
                     }
-                })
-            } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.no_internet),
-                    Toast.LENGTH_SHORT
-                ).show()
+                } else {
+                    showToast(getString(R.string.no_internet))
+                }
             }
         }
     }
+
+    private fun getCreateUserObservable(): Observer<ApiResponse<Boolean>> =
+        Observer<ApiResponse<Boolean>> { response ->
+            val toastText = when (response) {
+                is ApiResponse.Success -> {
+                    getString(R.string.account_created)
+                }
+                is ApiResponse.Error -> {
+                    response.errorMessage
+                        ?: getString(R.string.error)
+                }
+                is ApiResponse.Empty -> {
+                    getString(R.string.empty)
+                }
+            }
+            showToast(toastText)
+
+            binding.progressBar.visibility = View.GONE
+            lifecycleScope.launch {
+                delay(1000)
+                if (response is ApiResponse.Success) {
+                    onBackPressed()
+                }
+            }
+        }
 
 }

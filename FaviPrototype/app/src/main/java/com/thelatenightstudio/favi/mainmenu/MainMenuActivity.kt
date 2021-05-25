@@ -2,9 +2,12 @@ package com.thelatenightstudio.favi.mainmenu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
-import com.thelatenightstudio.favi.core.utils.ToastHelper
+import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : AppCompatActivity() {
@@ -28,14 +31,19 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         binding.btnActivateBiometric.setOnClickListener {
-            viewModel.activateBiometric()
-            val text = getString(R.string.successful)
-            ToastHelper.showToast(this, text)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val text =
+                    if (viewModel.activateBiometric()) getString(R.string.biometric_activated)
+                    else getString(R.string.biometric_deactivated)
+                showToast(text)
+            }
         }
     }
 
     override fun onDestroy() {
-        viewModel.signOut()
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.signOut()
+        }
         super.onDestroy()
     }
 }

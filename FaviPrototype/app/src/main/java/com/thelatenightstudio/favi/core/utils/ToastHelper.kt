@@ -5,12 +5,8 @@ import android.widget.Toast
 
 object ToastHelper {
 
-    fun showToast(context: Context, message: String) {
-        Toast.makeText(
-            context,
-            message,
-            Toast.LENGTH_SHORT
-        ).show()
+    fun Context.showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

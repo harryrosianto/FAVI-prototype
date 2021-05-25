@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
 import com.thelatenightstudio.favi.core.utils.ObserverHelper.getSignInObserver
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignInBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignInBiometric {
 
@@ -33,14 +36,14 @@ class SignInBiometric {
                 Log.d("Cek", "$errorCode :: $errString")
 
                 if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
-                    showToast(activity, resources.getString(R.string.biometric_error))
+                    activity.showToast(resources.getString(R.string.biometric_error))
                 }
             }
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
 
-                showToast(activity, resources.getString(R.string.failed))
+                activity.showToast(resources.getString(R.string.failed))
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -49,11 +52,13 @@ class SignInBiometric {
                 if (isConnected()) {
                     binding.progressBar.visibility = View.VISIBLE
 
-                    viewModel.signInWithBiometric().observe(
-                        activity, getSignInObserver(activity, resources, binding)
-                    )
+                    activity.lifecycleScope.launch(Dispatchers.IO) {
+                        viewModel.signInWithBiometric().observe(
+                            activity, getSignInObserver(activity, resources, binding)
+                        )
+                    }
                 } else {
-                    showToast(activity, resources.getString(R.string.no_internet))
+                    activity.showToast(resources.getString(R.string.no_internet))
                 }
             }
         }
@@ -83,31 +88,21 @@ class SignInBiometric {
         val biometricManager = BiometricManager.from(activity)
         when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)) {
             BiometricManager.BIOMETRIC_SUCCESS ->
-                if (viewModel.isBiometricActive())
-                    biometricPrompt.authenticate(promptInfo)
-                else showToast(
-                    activity,
-                    resources.getString(R.string.biometric_auth_is_off)
-                )
+                activity.lifecycleScope.launch(Dispatchers.IO) {
+                    if (viewModel.isBiometricActive())
+                        biometricPrompt.authenticate(promptInfo)
+                    else activity.showToast(resources.getString(R.string.biometric_auth_is_off))
+                }
 
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
-                showToast(
-                    activity,
-                    resources.getString(R.string.biometric_error_no_hardware)
-                )
+                activity.showToast(resources.getString(R.string.biometric_error_no_hardware))
 
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
-                showToast(
-                    activity,
-                    resources.getString(R.string.biometric_error_hw_unavailable)
-                )
+                activity.showToast(resources.getString(R.string.biometric_error_hw_unavailable))
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 // Prompts the user to create credentials that your app accepts.
-                showToast(
-                    activity,
-                    resources.getString(R.string.biometric_error_none_enrolled)
-                )
+                activity.showToast(resources.getString(R.string.biometric_error_none_enrolled))
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     val enrollIntent =

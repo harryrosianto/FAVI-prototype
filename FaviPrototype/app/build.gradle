@@ -62,8 +62,12 @@ dependencies {
 
     //ui
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'com.github.imnirdst:iivisu:1.1.0'
 
     //sharedpref encryption
     implementation 'androidx.security:security-crypto:1.1.0-alpha01'
     implementation 'com.scottyab:secure-preferences-lib:0.1.7'
+
+    //media
+    implementation 'com.github.squti:Android-Wave-Recorder:1.6.0'
 }

@@ -40,7 +40,7 @@ object ObservableHelper {
         emailStream: Observable<Boolean>,
         passwordStream: Observable<Boolean>,
         passwordConfirmationStream: Observable<Boolean>
-    ) =
+    ): Observable<Boolean> =
         Observable.combineLatest(
             emailStream,
             passwordStream,
@@ -52,7 +52,7 @@ object ObservableHelper {
     fun getInvalidFieldsStream(
         emailStream: Observable<Boolean>,
         passwordStream: Observable<Boolean>
-    ) =
+    ): Observable<Boolean> =
         Observable.combineLatest(
             emailStream,
             passwordStream,

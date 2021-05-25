@@ -8,7 +8,7 @@ import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
 
 class SignUpViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
 
-    fun createUser(email: String, password: String): LiveData<ApiResponse<Boolean>> =
+    suspend fun createUser(email: String, password: String): LiveData<ApiResponse<Boolean>> =
         faviUseCase.createUser(email, password).asLiveData()
 
 }

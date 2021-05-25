@@ -8,13 +8,13 @@ import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
 
 class SignInViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
 
-    fun signIn(email: String, password: String): LiveData<ApiResponse<Boolean>> =
+    suspend fun signIn(email: String, password: String): LiveData<ApiResponse<Boolean>> =
         faviUseCase.signIn(email, password).asLiveData()
 
-    fun signInWithBiometric(): LiveData<ApiResponse<Boolean>> =
+    suspend fun signInWithBiometric(): LiveData<ApiResponse<Boolean>> =
         faviUseCase.signInWithBiometric().asLiveData()
 
-    fun isBiometricActive(): Boolean =
+    suspend fun isBiometricActive(): Boolean =
         faviUseCase.isBiometricActive()
 
 }

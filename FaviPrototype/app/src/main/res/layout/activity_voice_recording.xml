@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".voicerecording.VoiceRecordingActivity">
+
+
+    <com.imn.iivisu.RecorderVisualizer
+        android:id="@+id/visualizer"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/visualizer_height"
+        android:layout_marginVertical="128dp"
+        android:background="@color/dark_gray"
+        app:approximateBarDuration="75"
+        app:backgroundBarPrimeColor="@color/gray"
+        app:barWidth="3dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:loadedBarPrimeColor="@color/primaryLight"
+        app:maxAmp="100"
+        app:spaceBetweenBar="2dp" />
+
+    <TextView
+        android:id="@+id/timeline_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_double"
+        android:text="@string/zero_time"
+        android:textColor="@color/primaryLight"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/record_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/record_button"
+        style="@style/IIVisuApp.CircleIconButton"
+        android:layout_margin="@dimen/spacing_double"
+        app:icon="@drawable/ic_record_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/IIVisuApp.ShapeAppearanceOverlay.Button.Circle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

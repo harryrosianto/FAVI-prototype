@@ -32,4 +32,9 @@
     <string name="biometric_auth_is_off">Please activate biometric sign in from the main menu first!</string>
     <string name="activate_biometric_sign_in">Activate Biometric Sign In</string>
     <string name="cd_aktfikan_fitur_sidik_jari">Aktfikan Fitur Sidik Jari</string>
+    <string name="sign_in_with_voice">Sign In with Voice</string>
+    <string name="voice_recording">Voice Recording</string>
+    <string name="zero_time">00:00</string>
+    <string name="biometric_activated">Biometric has been activated!</string>
+    <string name="biometric_deactivated">Biometric has been deactivated!</string>
 </resources>

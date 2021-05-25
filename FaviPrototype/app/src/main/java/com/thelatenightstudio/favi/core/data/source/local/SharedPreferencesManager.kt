@@ -1,4 +1,4 @@
-package com.thelatenightstudio.favi.core.security
+package com.thelatenightstudio.favi.core.data.source.local
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,7 +13,6 @@ class SharedPreferencesManager(context: Context) {
 
     companion object {
         private const val FILE_NAME = "shared_preferences_manager"
-        const val TOKEN = "token"
         const val BIOMETRIC_AUTH = "biometric_auth"
         const val USERNAME = "username"
         const val TEMPORARY_USERNAME = "temporary_username"
@@ -57,10 +56,18 @@ class SharedPreferencesManager(context: Context) {
     fun getString(key: String): String = sharedPref.getString(key, "") as String
     fun getBoolean(key: String): Boolean = sharedPref.getBoolean(key, false)
 
-    fun activateBiometricAuth() {
-        saveToPreference(USERNAME, getString(TEMPORARY_USERNAME))
-        saveToPreference(PASSWORD, getString(TEMPORARY_PASSWORD))
-        saveToPreference(BIOMETRIC_AUTH, true)
+    fun activateBiometricAuth(): Boolean {
+        val isActivated = getBoolean(BIOMETRIC_AUTH)
+        if (isActivated) {
+            saveToPreference(USERNAME, "")
+            saveToPreference(PASSWORD, "")
+            saveToPreference(BIOMETRIC_AUTH, false)
+        } else {
+            saveToPreference(USERNAME, getString(TEMPORARY_USERNAME))
+            saveToPreference(PASSWORD, getString(TEMPORARY_PASSWORD))
+            saveToPreference(BIOMETRIC_AUTH, true)
+        }
+        return !isActivated
     }
 
     fun signIn(username: String, password: String) {

@@ -4,11 +4,12 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.thelatenightstudio.favi.core.data.FaviRepository
+import com.thelatenightstudio.favi.core.data.source.local.SharedPreferencesManager
 import com.thelatenightstudio.favi.core.data.source.remote.RemoteDataSource
 import com.thelatenightstudio.favi.core.domain.repository.IFaviRepository
+import com.thelatenightstudio.favi.core.media.Recorder
 import com.thelatenightstudio.favi.core.security.CryptographyManager
 import com.thelatenightstudio.favi.core.security.CryptographyManagerImpl
-import com.thelatenightstudio.favi.core.security.SharedPreferencesManager
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -23,10 +24,14 @@ val repositoryModule = module {
     single<IFaviRepository> {
         FaviRepository(get(), get())
     }
+    single { SharedPreferencesManager(get()) }
 }
 
 @RequiresApi(Build.VERSION_CODES.M)
 val securityModule = module {
     factory<CryptographyManager> { CryptographyManagerImpl() }
-    factory { SharedPreferencesManager(get()) }
+}
+
+val mediaModule = module {
+    single { Recorder(get()) }
 }

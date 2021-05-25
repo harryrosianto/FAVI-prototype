@@ -5,20 +5,20 @@ import kotlinx.coroutines.flow.Flow
 
 interface FaviUseCase {
 
-    fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>>
+    suspend fun createUser(email: String, password: String): Flow<ApiResponse<Boolean>>
 
-    fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
+    suspend fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>>
 
-    fun signOut()
+    suspend fun signOut()
 
-    fun getIdToken(): Flow<ApiResponse<String>>
+    suspend fun getIdToken(): Flow<ApiResponse<String>>
 
-    fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
+    suspend fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
 
-    fun signInWithBiometric(): Flow<ApiResponse<Boolean>>
+    suspend fun signInWithBiometric(): Flow<ApiResponse<Boolean>>
 
-    fun isBiometricActive(): Boolean
+    suspend fun isBiometricActive(): Boolean
 
-    fun activateBiometric()
+    suspend fun activateBiometric(): Boolean
 
 }

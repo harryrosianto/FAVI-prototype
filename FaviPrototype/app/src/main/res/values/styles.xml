@@ -1,5 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <style name="Widget.FAVI.PreLogin.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">0dp</item>
@@ -18,6 +17,25 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:backgroundTint">@color/teal_700_medium</item>
         <item name="android:focusable">true</item>
+    </style>
+
+    <style name="IIVisuApp.CircleIconButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:padding">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconSize">32dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="strokeColor">@color/primaryLight</item>
+    </style>
+
+    <style name="IIVisuApp.ShapeAppearanceOverlay.Button.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
 </resources>
