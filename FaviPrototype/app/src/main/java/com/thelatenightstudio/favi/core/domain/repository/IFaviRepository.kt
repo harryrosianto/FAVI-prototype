@@ -15,4 +15,16 @@ interface IFaviRepository {
 
     fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
 
+    fun getEmailFromSharedPref(): String
+
+    fun getPasswordFromSharedPref(): String
+
+    fun getBiometricAuthFromSharedPref(): Boolean
+
+    fun saveTemporaryCredentialsToSharedPref(email: String, password: String)
+
+    fun deleteTemporaryCredentialsFromSharedPref()
+
+    fun activateBiometric()
+
 }

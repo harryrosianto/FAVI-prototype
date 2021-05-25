@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
-import com.thelatenightstudio.favi.core.utils.EditTextHelper
-import com.thelatenightstudio.favi.core.utils.InternetHelper
-import com.thelatenightstudio.favi.core.utils.ObservableHelper
+import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
+import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
+import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
+import com.thelatenightstudio.favi.core.utils.ObservableHelper.getInvalidFieldsStream
+import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordConfirmationStream
+import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
 import com.thelatenightstudio.favi.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -31,9 +34,9 @@ class SignUpActivity : AppCompatActivity() {
         binding.parentLayout.requestFocus()
 
         val emailStream =
-            ObservableHelper.getEmailStream(binding.edEmail)
+            getEmailStream(binding.edEmail)
         emailStream.subscribe {
-            EditTextHelper.showEditTextExistAlert(
+            showEditTextExistAlert(
                 binding.edEmail,
                 it,
                 getString(R.string.email_not_valid)
@@ -41,9 +44,9 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         val passwordStream =
-            ObservableHelper.getPasswordStream(binding.edPassword)
+            getPasswordStream(binding.edPassword)
         passwordStream.subscribe {
-            EditTextHelper.showEditTextExistAlert(
+            showEditTextExistAlert(
                 binding.edPassword,
                 it,
                 getString(R.string.password_not_valid)
@@ -51,12 +54,12 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         val passwordConfirmationStream =
-            ObservableHelper.getPasswordConfirmationStream(
+            getPasswordConfirmationStream(
                 binding.edPassword,
                 binding.edConfirmPassword
             )
         passwordConfirmationStream.subscribe {
-            EditTextHelper.showEditTextExistAlert(
+            showEditTextExistAlert(
                 binding.edConfirmPassword,
                 it,
                 getString(R.string.password_not_same)
@@ -64,7 +67,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         val invalidFieldsStream =
-            ObservableHelper.getInvalidFieldsStream(
+            getInvalidFieldsStream(
                 emailStream,
                 passwordStream,
                 passwordConfirmationStream
@@ -72,7 +75,7 @@ class SignUpActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
 
         binding.btnSignUp.setOnClickListener {
-            if (InternetHelper.isConnected()) {
+            if (isConnected()) {
                 binding.progressBar.visibility = View.VISIBLE
 
                 val email = binding.edEmail.text.toString()

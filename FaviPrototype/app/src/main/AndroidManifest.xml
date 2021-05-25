@@ -22,7 +22,7 @@
         <activity
             android:name=".signup.SignUpActivity"
             android:label="@string/sign_up" />
-        <activity android:name=".ui.MainMenuActivity" />
+        <activity android:name=".mainmenu.MainMenuActivity" />
         <activity android:name=".ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

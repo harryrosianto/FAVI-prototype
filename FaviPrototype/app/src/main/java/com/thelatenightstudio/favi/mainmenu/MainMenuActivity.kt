@@ -1,12 +1,10 @@
-package com.thelatenightstudio.favi.ui
+package com.thelatenightstudio.favi.mainmenu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.thelatenightstudio.favi.R
-import com.thelatenightstudio.favi.core.security.SharedPreferencesManager
 import com.thelatenightstudio.favi.core.utils.ToastHelper
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : AppCompatActivity() {
@@ -18,7 +16,6 @@ class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainMenuBinding
 
     private val viewModel: MainMenuViewModel by viewModel()
-    private val spmanager: SharedPreferencesManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +27,8 @@ class MainMenuActivity : AppCompatActivity() {
             binding.textView.text = text
         }
 
-        binding.btnSaveToken.setOnClickListener {
-            spmanager.activateBiometricAuth()
+        binding.btnActivateBiometric.setOnClickListener {
+            viewModel.activateBiometric()
             val text = getString(R.string.successful)
             ToastHelper.showToast(this, text)
         }
@@ -39,7 +36,6 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         viewModel.signOut()
-        spmanager.signOut()
         super.onDestroy()
     }
 }

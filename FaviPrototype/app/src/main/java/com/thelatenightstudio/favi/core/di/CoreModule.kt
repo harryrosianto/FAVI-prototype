@@ -21,7 +21,7 @@ val networkModule = module {
 val repositoryModule = module {
     single { RemoteDataSource(get()) }
     single<IFaviRepository> {
-        FaviRepository(get())
+        FaviRepository(get(), get())
     }
 }
 

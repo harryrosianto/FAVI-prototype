@@ -12,9 +12,9 @@ import com.securepreferences.SecurePreferences
 class SharedPreferencesManager(context: Context) {
 
     companion object {
+        private const val FILE_NAME = "shared_preferences_manager"
         const val TOKEN = "token"
         const val BIOMETRIC_AUTH = "biometric_auth"
-        private const val FILE_NAME = "shared_preferences_manager"
         const val USERNAME = "username"
         const val TEMPORARY_USERNAME = "temporary_username"
         const val PASSWORD = "password"

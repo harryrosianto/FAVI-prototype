@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.MainMenuActivity">
+    tools:context=".mainmenu.MainMenuActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -18,11 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/btn_save_token"
+        android:id="@+id/btn_activate_biometric"
         style="@style/Widget.FAVI.MainMenu.Button"
+        android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,19 +30,19 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_marginTop="10dp"
                 android:layout_width="95dp"
                 android:layout_height="95dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/ic_fingerprint"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:text="@string/activate_biometric_sign_in"
                 android:textAppearance="?attr/textAppearanceListItem"

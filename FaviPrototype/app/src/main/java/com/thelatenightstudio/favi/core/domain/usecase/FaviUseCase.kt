@@ -15,4 +15,10 @@ interface FaviUseCase {
 
     fun signInWithCustomToken(token: String): Flow<ApiResponse<Boolean>>
 
+    fun signInWithBiometric(): Flow<ApiResponse<Boolean>>
+
+    fun isBiometricActive(): Boolean
+
+    fun activateBiometric()
+
 }
