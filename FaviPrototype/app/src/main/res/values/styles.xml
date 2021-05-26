@@ -9,8 +9,6 @@
     </style>
 
     <style name="Widget.FAVI.MainMenu.Button" parent="Widget.MaterialComponents.CardView">
-        <item name="android:layout_width">170dp</item>
-        <item name="android:layout_height">170dp</item>
         <item name="cardCornerRadius">25dp</item>
         <item name="cardElevation">0dp</item>
         <item name="android:clickable">true</item>

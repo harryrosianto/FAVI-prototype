@@ -1,11 +1,14 @@
 package com.thelatenightstudio.favi.mainmenu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
+import com.thelatenightstudio.favi.signup.SignUpActivity
+import com.thelatenightstudio.favi.transfermenu.TransferMenuActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,6 +40,11 @@ class MainMenuActivity : AppCompatActivity() {
                     else getString(R.string.biometric_deactivated)
                 showToast(text)
             }
+        }
+
+        binding.btnBalanceTransfer.setOnClickListener {
+            val intent = Intent(this, TransferMenuActivity::class.java)
+            startActivity(intent)
         }
     }
 

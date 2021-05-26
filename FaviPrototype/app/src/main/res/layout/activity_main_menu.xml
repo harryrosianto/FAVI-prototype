@@ -7,11 +7,94 @@
     android:padding="16dp"
     tools:context=".mainmenu.MainMenuActivity">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_user_data"
+        style="@style/Widget.FAVI.MainMenu.Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/user_cardview_text"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_user_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/user_balance"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_balance_transfer"
+        style="@style/Widget.FAVI.MainMenu.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="@id/btn_user_data"
+        app:layout_constraintTop_toBottomOf="@id/btn_user_data">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_balance_transfer"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:minLines="2"
+                android:text="@string/transfer_fund"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/biometric_berhasil"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,30 +103,34 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_activate_biometric"
         style="@style/Widget.FAVI.MainMenu.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/btn_user_data"
+        app:layout_constraintTop_toBottomOf="@id/btn_user_data">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="95dp"
                 android:layout_height="95dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:src="@drawable/ic_fingerprint"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:gravity="center"
+                android:minLines="2"
                 android:text="@string/toggle_biometric_sign_in"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/white" />
