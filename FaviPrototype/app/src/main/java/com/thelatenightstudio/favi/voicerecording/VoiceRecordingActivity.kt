@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.media.Recorder
 import com.thelatenightstudio.favi.core.utils.DrawableHelper.getDrawableCompat
@@ -12,6 +13,7 @@ import com.thelatenightstudio.favi.core.utils.NumberHelper.formatAsTime
 import com.thelatenightstudio.favi.core.utils.PermissionHelper.checkAudioPermission
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityVoiceRecordingBinding
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import kotlin.math.sqrt
 
@@ -54,7 +56,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
                 recordButton.icon = getDrawableCompat(R.drawable.ic_record_24)
 
                 Log.d("Cek", "listenOnRecorderStates: ${applicationContext.recordFile}")
-                showToast("RECORD BERHASIL")
+                lifecycleScope.launch { showToast("RECORD BERHASIL") }
             }
             onAmpListener = {
                 runOnUiThread {

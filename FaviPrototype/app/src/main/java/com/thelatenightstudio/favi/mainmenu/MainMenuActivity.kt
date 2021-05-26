@@ -6,7 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +31,7 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         binding.btnActivateBiometric.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch(IO) {
                 val text =
                     if (viewModel.activateBiometric()) getString(R.string.biometric_activated)
                     else getString(R.string.biometric_deactivated)
@@ -41,7 +41,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(IO) {
             viewModel.signOut()
         }
         super.onDestroy()

@@ -16,13 +16,13 @@ import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
 import com.thelatenightstudio.favi.core.utils.ObserverHelper.getSignInObserver
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignInBinding
+import com.thelatenightstudio.favi.signin.SignInBiometric.biometricAuthProcess
+import com.thelatenightstudio.favi.signin.SignInBiometric.getBiometricPrompt
+import com.thelatenightstudio.favi.signin.SignInBiometric.getPromptInfo
 import com.thelatenightstudio.favi.voicerecording.VoiceRecordingActivity
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInActivity : AppCompatActivity() {
@@ -34,7 +34,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
 
     private val viewModel: SignInViewModel by viewModel()
-    private val biometric: SignInBiometric by inject()
 
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
@@ -47,22 +46,10 @@ class SignInActivity : AppCompatActivity() {
 
         binding.parentLayout.requestFocus()
 
-        biometricPrompt = biometric.getBiometricPrompt(
-            this,
-            resources,
-            binding,
-            viewModel
-        )
-        promptInfo = biometric.getPromptInfo(resources)
-
+        biometricPrompt = getBiometricPrompt(binding, viewModel)
+        promptInfo = getPromptInfo()
         binding.btnBiometric.setOnClickListener {
-            biometric.biometricAuthProcess(
-                this,
-                resources,
-                viewModel,
-                biometricPrompt,
-                promptInfo
-            )
+            biometricAuthProcess(viewModel, biometricPrompt, promptInfo)
         }
 
         binding.btnVoice.setOnClickListener {
@@ -92,21 +79,15 @@ class SignInActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignIn.isEnabled = isValid }
 
         binding.btnSignIn.setOnClickListener {
-            lifecycleScope.launch(Default) {
+            lifecycleScope.launch {
                 if (isConnected()) {
-                    (Main){
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
+                    binding.progressBar.visibility = View.VISIBLE
 
                     val email = binding.edEmail.text.toString()
                     val password = binding.edPassword.text.toString()
 
-                    (Main){
-                        (IO){ viewModel.signIn(email, password) }
-                            .observe(this@SignInActivity,
-                                (Default){ getSignInObserver(binding) }
-                            )
-                    }
+                    (IO){ viewModel.signIn(email, password) }
+                        .observe(this@SignInActivity, getSignInObserver(binding))
                 } else {
                     showToast(getString(R.string.no_internet))
                 }

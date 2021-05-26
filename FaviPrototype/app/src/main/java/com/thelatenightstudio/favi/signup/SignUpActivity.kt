@@ -17,9 +17,7 @@ import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpActivity : AppCompatActivity() {
@@ -78,20 +76,15 @@ class SignUpActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
 
         binding.btnSignUp.setOnClickListener {
-            lifecycleScope.launch(Default) {
+            lifecycleScope.launch {
                 if (isConnected()) {
-                    (Main) {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
+                    binding.progressBar.visibility = View.VISIBLE
 
                     val email = binding.edEmail.text.toString()
                     val password = binding.edPassword.text.toString()
 
-                    (Main) {
-                        (IO) { viewModel.createUser(email, password) }
-                            .observe(this@SignUpActivity,
-                                (Default) { getCreateUserObservable() })
-                    }
+                    (IO) { viewModel.createUser(email, password) }
+                        .observe(this@SignUpActivity, getCreateUserObservable())
                 } else {
                     showToast(getString(R.string.no_internet))
                 }
@@ -113,10 +106,11 @@ class SignUpActivity : AppCompatActivity() {
                     getString(R.string.empty)
                 }
             }
-            showToast(toastText)
 
-            binding.progressBar.visibility = View.GONE
             lifecycleScope.launch {
+                showToast(toastText)
+                binding.progressBar.visibility = View.GONE
+
                 delay(1000)
                 if (response is ApiResponse.Success) {
                     onBackPressed()

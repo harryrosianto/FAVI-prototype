@@ -7,7 +7,6 @@ import com.thelatenightstudio.favi.core.di.mediaModule
 import com.thelatenightstudio.favi.core.di.networkModule
 import com.thelatenightstudio.favi.core.di.repositoryModule
 import com.thelatenightstudio.favi.core.di.securityModule
-import com.thelatenightstudio.favi.di.biometricModule
 import com.thelatenightstudio.favi.di.useCaseModule
 import com.thelatenightstudio.favi.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -31,7 +30,6 @@ class FaviApplication : Application() {
                     securityModule,
                     useCaseModule,
                     viewModelModule,
-                    biometricModule,
                     mediaModule
                 )
             )

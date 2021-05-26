@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 object ObserverHelper {
 
     fun AppCompatActivity.getSignInObserver(
-        binding: ActivitySignInBinding,
+        binding: ActivitySignInBinding
     ) =
         Observer<ApiResponse<Boolean>> { response ->
             val toastText = when (response) {
@@ -31,10 +31,10 @@ object ObserverHelper {
                     getString(R.string.empty)
                 }
             }
-            showToast(toastText)
-
-            binding.progressBar.visibility = View.GONE
             lifecycleScope.launch {
+                showToast(toastText)
+                binding.progressBar.visibility = View.GONE
+
                 delay(1000)
                 if (response is ApiResponse.Success) {
                     val intent = Intent(this@getSignInObserver, MainMenuActivity::class.java)
@@ -43,5 +43,4 @@ object ObserverHelper {
                 }
             }
         }
-
 }
