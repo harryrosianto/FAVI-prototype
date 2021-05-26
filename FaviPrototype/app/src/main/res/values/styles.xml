@@ -30,7 +30,7 @@
         <item name="iconPadding">0dp</item>
         <item name="iconSize">32dp</item>
         <item name="iconGravity">textStart</item>
-        <item name="strokeColor">@color/primaryLight</item>
+        <item name="strokeColor">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="IIVisuApp.ShapeAppearanceOverlay.Button.Circle" parent="">

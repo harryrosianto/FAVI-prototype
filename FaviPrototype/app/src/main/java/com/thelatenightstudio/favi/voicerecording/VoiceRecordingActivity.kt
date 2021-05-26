@@ -27,7 +27,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
     private val recorder: Recorder by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+        delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         super.onCreate(savedInstanceState)
         binding = ActivityVoiceRecordingBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -44,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center"
-                android:text="@string/activate_biometric_sign_in"
+                android:text="@string/toggle_biometric_sign_in"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/white" />
         </LinearLayout>

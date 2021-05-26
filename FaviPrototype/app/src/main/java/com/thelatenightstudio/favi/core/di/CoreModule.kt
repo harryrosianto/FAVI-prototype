@@ -8,8 +8,6 @@ import com.thelatenightstudio.favi.core.data.source.local.SharedPreferencesManag
 import com.thelatenightstudio.favi.core.data.source.remote.RemoteDataSource
 import com.thelatenightstudio.favi.core.domain.repository.IFaviRepository
 import com.thelatenightstudio.favi.core.media.Recorder
-import com.thelatenightstudio.favi.core.security.CryptographyManager
-import com.thelatenightstudio.favi.core.security.CryptographyManagerImpl
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -28,10 +26,6 @@ val repositoryModule = module {
 }
 
 @RequiresApi(Build.VERSION_CODES.M)
-val securityModule = module {
-    factory<CryptographyManager> { CryptographyManagerImpl() }
-}
-
 val mediaModule = module {
     single { Recorder(get()) }
 }
