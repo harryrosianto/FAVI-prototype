@@ -5,4 +5,4 @@
 - TensorFlow 1.5 or higher
 
 ### Dataset use
-Google Speech Command Dataset
+Favi Speech Commands Dataset (id). This dataset consists of over 5,800 WAV audio files of people saying 29 different words. This data was collected by The Late Nite Studio Team.
