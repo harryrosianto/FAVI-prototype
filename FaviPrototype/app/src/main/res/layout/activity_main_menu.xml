@@ -58,7 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari"
+        android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="@id/btn_user_data"
         app:layout_constraintTop_toBottomOf="@id/btn_user_data">
@@ -89,24 +89,13 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/biometric_berhasil"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_activate_biometric"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:contentDescription="@string/cd_aktfikan_fitur_sidik_jari"
+        android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/btn_user_data"
         app:layout_constraintTop_toBottomOf="@id/btn_user_data">

@@ -1,21 +1,13 @@
-package com.thelatenightstudio.favi.ui
+package com.thelatenightstudio.favi.home
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
-import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.databinding.ActivityHomeBinding
 import com.thelatenightstudio.favi.signin.SignInActivity
 import com.thelatenightstudio.favi.signup.SignUpActivity
-import java.nio.charset.Charset
 
 class HomeActivity : AppCompatActivity() {
 

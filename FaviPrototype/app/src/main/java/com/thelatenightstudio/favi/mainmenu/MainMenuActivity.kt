@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
-import com.thelatenightstudio.favi.signup.SignUpActivity
 import com.thelatenightstudio.favi.transfermenu.TransferMenuActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -27,11 +26,6 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (intent.extras != null) {
-            val text = intent.getStringExtra(EXTRA_STRING)
-            binding.textView.text = text
-        }
 
         binding.btnActivateBiometric.setOnClickListener {
             lifecycleScope.launch(IO) {

@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
+import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getInvalidFieldsStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordStream
@@ -87,7 +88,7 @@ class SignInActivity : AppCompatActivity() {
                     val password = binding.edPassword.text.toString()
 
                     (IO){ viewModel.signIn(email, password) }
-                        .observe(this@SignInActivity, getSignInObserver(binding))
+                        .observeOnce(this@SignInActivity, getSignInObserver(binding))
                 } else {
                     showToast(getString(R.string.no_internet))
                 }

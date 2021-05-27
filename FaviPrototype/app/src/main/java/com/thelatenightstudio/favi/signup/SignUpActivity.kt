@@ -10,6 +10,7 @@ import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
+import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getInvalidFieldsStream
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getPasswordConfirmationStream
@@ -83,8 +84,11 @@ class SignUpActivity : AppCompatActivity() {
                     val email = binding.edEmail.text.toString()
                     val password = binding.edPassword.text.toString()
 
-                    (IO) { viewModel.createUser(email, password) }
-                        .observe(this@SignUpActivity, getCreateUserObservable())
+                    (IO) {
+                        viewModel.setEmail(email)
+                        viewModel.setPassword(password)
+                        viewModel.createUser()
+                    }.observeOnce(this@SignUpActivity, getCreateUserObservable())
                 } else {
                     showToast(getString(R.string.no_internet))
                 }
@@ -94,26 +98,28 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun getCreateUserObservable(): Observer<ApiResponse<Boolean>> =
         Observer<ApiResponse<Boolean>> { response ->
-            val toastText = when (response) {
-                is ApiResponse.Success -> {
-                    getString(R.string.account_created)
+            if (response != null) {
+                val toastText = when (response) {
+                    is ApiResponse.Success -> {
+                        getString(R.string.account_created)
+                    }
+                    is ApiResponse.Error -> {
+                        response.errorMessage
+                            ?: getString(R.string.error)
+                    }
+                    is ApiResponse.Empty -> {
+                        getString(R.string.empty)
+                    }
                 }
-                is ApiResponse.Error -> {
-                    response.errorMessage
-                        ?: getString(R.string.error)
-                }
-                is ApiResponse.Empty -> {
-                    getString(R.string.empty)
-                }
-            }
 
-            lifecycleScope.launch {
-                showToast(toastText)
-                binding.progressBar.visibility = View.GONE
+                lifecycleScope.launch {
+                    showToast(toastText)
+                    binding.progressBar.visibility = View.GONE
 
-                delay(1000)
-                if (response is ApiResponse.Success) {
-                    onBackPressed()
+                    delay(1000)
+                    if (response is ApiResponse.Success) {
+                        onBackPressed()
+                    }
                 }
             }
         }

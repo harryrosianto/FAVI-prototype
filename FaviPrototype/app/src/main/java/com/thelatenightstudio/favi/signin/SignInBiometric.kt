@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
+import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ObserverHelper.getSignInObserver
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivitySignInBinding
@@ -52,7 +53,7 @@ object SignInBiometric {
                         binding.progressBar.visibility = View.VISIBLE
 
                         (IO){ viewModel.signInWithBiometric() }
-                            .observe(this@getBiometricPrompt, getSignInObserver(binding))
+                            .observeOnce(this@getBiometricPrompt, getSignInObserver(binding))
                     } else {
                         showToast(getString(R.string.no_internet))
                     }
