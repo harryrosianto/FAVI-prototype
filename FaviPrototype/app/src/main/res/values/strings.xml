@@ -23,6 +23,8 @@
     <string name="biometric_error_none_enrolled">Please setup your biometric first</string>
     <string name="biometric_auth_is_off">Please activate biometric sign in from the main menu first!</string>
     <string name="cd_aktifkan_fitur_sidik_jari">Aktifkan Fitur Sidik Jari</string>
+    <string name="cd_tambah_saldo">Tambah Saldo</string>
+    <string name="cd_transfer_saldo">Transfer Saldo</string>
     <string name="sign_in_with_voice">Sign In with Voice</string>
     <string name="voice_recording">Voice Recording</string>
     <string name="zero_time">00:00</string>
@@ -36,10 +38,15 @@
     <string name="user_balance">12.000.000</string>
     <string name="transfer_fund">Transfer Fund</string>
     <string name="toggle_biometric_sign_in">Toggle Biometric Sign In</string>
+    <string name="add_fund">Add Fund</string>
+
+    <string name="request_fund">Request Fund</string>
+    <string name="requested_fund_amount_IDR">Requested Fund Amount (IDR)</string>
 
     <string name="bank_name">Bank Name</string>
     <string name="transfer_token_id">Receiver ID/Token</string>
     <string name="transferred_balance">Transferred Balance (IDR)</string>
     <string name="confirm_transfer">Confirm Transfer</string>
+    <string name="add_fund_disclaimer">Note: The way this page currently work are for testing purpose only and not reflecting the vision of final product</string>
 
 </resources>

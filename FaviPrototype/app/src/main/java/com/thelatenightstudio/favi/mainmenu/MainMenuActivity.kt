@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
+import com.thelatenightstudio.favi.addfundmenu.AddFundActivity
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
 import com.thelatenightstudio.favi.transfermenu.TransferMenuActivity
@@ -36,10 +37,18 @@ class MainMenuActivity : AppCompatActivity() {
             }
         }
 
+
+        //Only move to add fund activity balance activity with intent
+        binding.btnAddFund.setOnClickListener {
+            val intent = Intent(this, AddFundActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnBalanceTransfer.setOnClickListener {
             val intent = Intent(this, TransferMenuActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 
     override fun onDestroy() {

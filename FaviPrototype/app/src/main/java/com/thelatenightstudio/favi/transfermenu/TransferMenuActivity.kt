@@ -13,5 +13,9 @@ class TransferMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transfer_menu)
+
+        //Set the name of activity in top bar
+        title = getString(R.string.transfer_fund)
+
     }
 }
