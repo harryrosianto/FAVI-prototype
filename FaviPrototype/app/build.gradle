@@ -33,6 +33,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
     }
 }
 
@@ -70,4 +71,10 @@ dependencies {
 
     //media
     implementation 'com.github.squti:Android-Wave-Recorder:1.6.0'
+
+    //ml
+    implementation 'org.tensorflow:tensorflow-lite-support:0.2.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.2.0'
 }

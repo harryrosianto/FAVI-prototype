@@ -15,10 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_STRING = "extra_string"
-    }
-
     private lateinit var binding: ActivityMainMenuBinding
 
     private val viewModel: MainMenuViewModel by viewModel()
@@ -46,6 +42,7 @@ class MainMenuActivity : AppCompatActivity() {
         binding.btnBalanceTransfer.setOnClickListener {
             val intent = Intent(this, TransferMenuActivity::class.java)
             startActivity(intent)
+
         }
 
 

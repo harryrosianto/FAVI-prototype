@@ -7,6 +7,7 @@ import com.thelatenightstudio.favi.core.data.FaviRepository
 import com.thelatenightstudio.favi.core.data.source.local.SharedPreferencesManager
 import com.thelatenightstudio.favi.core.data.source.remote.RemoteDataSource
 import com.thelatenightstudio.favi.core.domain.repository.IFaviRepository
+import com.thelatenightstudio.favi.core.media.ModelWithAudioRecord
 import com.thelatenightstudio.favi.core.media.Recorder
 import org.koin.dsl.module
 
@@ -28,4 +29,5 @@ val repositoryModule = module {
 @RequiresApi(Build.VERSION_CODES.M)
 val mediaModule = module {
     single { Recorder(get()) }
+    single { ModelWithAudioRecord(get()) }
 }

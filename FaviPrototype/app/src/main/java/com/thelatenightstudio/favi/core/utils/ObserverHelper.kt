@@ -38,7 +38,6 @@ object ObserverHelper {
                 delay(1000)
                 if (response is ApiResponse.Success) {
                     val intent = Intent(this@getSignInObserver, MainMenuActivity::class.java)
-                    intent.putExtra(MainMenuActivity.EXTRA_STRING, "SIGN IN BERHASIL")
                     startActivity(intent)
                 }
             }

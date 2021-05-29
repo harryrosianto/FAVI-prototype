@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
+import com.thelatenightstudio.favi.core.media.ModelWithAudioRecord
 import com.thelatenightstudio.favi.core.media.Recorder
 import com.thelatenightstudio.favi.core.utils.DrawableHelper.getDrawableCompat
 import com.thelatenightstudio.favi.core.utils.FileHelper.recordFile
@@ -25,6 +26,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVoiceRecordingBinding
     private val recorder: Recorder by inject()
+    private val modelRecorder: ModelWithAudioRecord by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
@@ -38,7 +40,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
     }
 
     private fun initUI() = with(binding) {
-        recordButton.setOnClickListener { recorder.toggleRecording() }
+        recordButton.setOnClickListener { modelRecorder.toggleRecording() }
         visualizer.ampNormalizer = { sqrt(it.toFloat()).toInt() }
     }
 
@@ -48,7 +50,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
     }
 
     private fun listenOnRecorderStates() = with(binding) {
-        recorder.init().apply {
+        modelRecorder.init().apply {
             onStart = { recordButton.icon = getDrawableCompat(R.drawable.ic_stop_24) }
             onStop = {
                 visualizer.clear()
@@ -62,7 +64,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (recorder.isRecording) {
                         timelineTextView.text = recorder.getCurrentTime().formatAsTime()
-                        visualizer.addAmp(it, tickDuration)
+                        visualizer.addAmp(it, 1)
                     }
                 }
             }

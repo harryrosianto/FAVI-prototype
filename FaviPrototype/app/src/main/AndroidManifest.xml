@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.thelatenightstudio.favi">
 
-    <uses-sdk tools:overrideLibrary="androidx.security" />
+    <uses-sdk tools:overrideLibrary="src.java.org.tensorflow.lite.task.audio" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
-        <activity android:name=".addfundmenu.AddFundActivity"></activity>
+        <activity android:name=".addfundmenu.AddFundActivity" />
         <activity android:name=".transfermenu.TransferMenuActivity" />
         <activity
             android:name=".voicerecording.VoiceRecordingActivity"
