@@ -3,20 +3,19 @@ package com.thelatenightstudio.favi.core.media
 import android.content.Context
 import android.media.AudioRecord
 import android.os.Build
+import android.os.Handler
+import android.os.HandlerThread
 import android.util.Log
 import androidx.annotation.RequiresApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.core.os.HandlerCompat
 import org.tensorflow.lite.support.audio.TensorAudio
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier
 
 class ModelWithAudioRecord(private val context: Context) {
 
     companion object {
-        private const val MODEL_FILE = "favi_model.tflite"
-        private const val MINIMUM_DISPLAY_THRESHOLD: Float = 0.3f
+        private const val MODEL_FILE = "favi_metadata.tflite"
+        private const val MINIMUM_DISPLAY_THRESHOLD: Float = 0.5f
         private const val CLASSIFICATION_INTERVAL =
             500L // how often should classification run in milli-secs
     }
@@ -35,6 +34,8 @@ class ModelWithAudioRecord(private val context: Context) {
 
     private var startTime: Long = 0
 
+    private lateinit var handler: Handler // background thread handler to run classification
+
     var isRecording = false
         private set
 
@@ -46,17 +47,24 @@ class ModelWithAudioRecord(private val context: Context) {
         // Initialize the audio recorder
         recorder = classifier?.createAudioRecord()
 
+        val handlerThread = HandlerThread("backgroundThread")
+        handlerThread.start()
+        handler = HandlerCompat.createAsync(handlerThread.looper)
+
         return this
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun toggleRecording() {
         isRecording = if (!isRecording) {
             startTime = System.currentTimeMillis()
             recorder?.startRecording()
+            classificationProcess()
             onStart?.invoke()
             true
         } else {
             recorder?.stop()
+            handler.removeCallbacksAndMessages(null)
             onStop?.invoke()
             false
         }
@@ -86,17 +94,13 @@ class ModelWithAudioRecord(private val context: Context) {
                 Log.d("MWAR", "Latency = ${finishTime - startTime}ms")
                 Log.d("MWAR", "run: $filteredModelOutput")
 
-                CoroutineScope(Dispatchers.Default).launch {
-                    delay(CLASSIFICATION_INTERVAL)
-                    run()
-                }
+                // Rerun the classification after a certain interval
+                handler.postDelayed(this, CLASSIFICATION_INTERVAL)
             }
         }
 
         // Start the classification process
-        CoroutineScope(Dispatchers.Default).launch {
-            run.run()
-        }
+        handler.post(run)
     }
 
     fun getCurrentTime() = System.currentTimeMillis() - startTime
@@ -105,8 +109,8 @@ class ModelWithAudioRecord(private val context: Context) {
         onStart = null
         onStop = null
 //        recorder.onAmplitudeListener = null
-
         classifier = null
+        audioTensor = null
         recorder = null
     }
 
