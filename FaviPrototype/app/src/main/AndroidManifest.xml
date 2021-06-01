@@ -20,7 +20,9 @@
         <activity
             android:name=".addfundmenu.AddFundActivity"
             android:label="@string/request_fund" />
-        <activity android:name=".transfermenu.TransferMenuActivity" />
+        <activity
+            android:name=".transfermenu.TransferMenuActivity"
+            android:label="@string/transfer_fund" />
         <activity
             android:name=".voicerecording.VoiceRecordingActivity"
             android:label="@string/voice_recording" />

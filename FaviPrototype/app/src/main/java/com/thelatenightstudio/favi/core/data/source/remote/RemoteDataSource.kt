@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GetTokenResult
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -24,6 +25,8 @@ class RemoteDataSource(
     companion object {
         const val USERS = "users"
         const val BALANCE = "balance"
+
+        const val BALANCE_NOT_ENOUGH = "You don't have enough balance to transfer!"
     }
 
     @ExperimentalCoroutinesApi
@@ -144,7 +147,7 @@ class RemoteDataSource(
                 }
 
             val docRef = firebaseFirestore.collection(USERS).document(email)
-            val transac = firebaseFirestore.runTransaction { transaction ->
+            firebaseFirestore.runTransaction { transaction ->
                 val snapshot = transaction.get(docRef)
                 val balance = snapshot.getDouble(BALANCE)
                 val totalBalance = balance?.plus(requestAmount)
@@ -177,5 +180,66 @@ class RemoteDataSource(
 
             awaitClose { listener.remove() }
         }.flowOn(Dispatchers.IO)
+
+    @ExperimentalCoroutinesApi
+    fun transferBalanceToAnotherUser(
+        targetEmail: String,
+        requestAmount: Double
+    ): Flow<ApiResponse<Boolean>> =
+        callbackFlow {
+            val email = firebaseAuth.currentUser?.email ?: ""
+            val callback =
+                OnCompleteListener<Nothing> { task ->
+                    if (task.isSuccessful)
+                        trySend(ApiResponse.Success(task.isSuccessful))
+                    else
+                        trySend(ApiResponse.Error(task.exception?.message))
+                }
+
+            val userDocRef = firebaseFirestore.collection(USERS).document(email)
+            userDocRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val balance = task.result?.getDouble(BALANCE)
+                    val balanceAfterTransfer = balance?.minus(requestAmount)
+                    if (balanceAfterTransfer != null) {
+                        val isBalanceEnough = balanceAfterTransfer > 0
+                        if (isBalanceEnough) {
+                            executeTransferBalanceTransaction(
+                                targetEmail,
+                                userDocRef,
+                                requestAmount,
+                                callback
+                            )
+                        } else trySend(ApiResponse.Error(BALANCE_NOT_ENOUGH))
+                    }
+                } else
+                    trySend(ApiResponse.Error(task.exception?.message))
+            }
+
+            awaitClose { }
+        }.flowOn(Dispatchers.IO)
+
+    private fun executeTransferBalanceTransaction(
+        targetEmail: String,
+        userDocRef: DocumentReference,
+        requestAmount: Double,
+        callback: OnCompleteListener<Nothing>
+    ) {
+        val targetDocRef =
+            firebaseFirestore.collection(USERS).document(targetEmail)
+
+        firebaseFirestore.runTransaction { transaction ->
+            val userSnapshot = transaction.get(userDocRef)
+            val userBalance = userSnapshot.getDouble(BALANCE)
+            val userTotalBalance = userBalance?.minus(requestAmount)
+            val targetSnapshot = transaction.get(targetDocRef)
+            val targetBalance = targetSnapshot.getDouble(BALANCE)
+            val targetTotalBalance = targetBalance?.plus(requestAmount)
+
+            transaction.update(userDocRef, BALANCE, userTotalBalance)
+            transaction.update(targetDocRef, BALANCE, targetTotalBalance)
+            null
+        }.addOnCompleteListener(callback)
+    }
 
 }

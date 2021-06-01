@@ -6,6 +6,7 @@ import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
 import com.thelatenightstudio.favi.mainmenu.MainMenuViewModel
 import com.thelatenightstudio.favi.signin.SignInViewModel
 import com.thelatenightstudio.favi.signup.SignUpViewModel
+import com.thelatenightstudio.favi.transfermenu.TransferMenuViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,5 +19,6 @@ val viewModelModule = module {
     viewModel { SignInViewModel(get()) }
     viewModel { MainMenuViewModel(get()) }
     viewModel { AddFundViewModel(get()) }
+    viewModel { TransferMenuViewModel(get()) }
 }
 

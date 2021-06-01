@@ -47,4 +47,10 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     override suspend fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>> =
         faviRepository.getRealtimeUpdatesOfCurrentUser()
 
+    override suspend fun transferBalanceToAnotherUser(
+        targetEmail: String,
+        requestAmount: Double
+    ): Flow<ApiResponse<Boolean>> =
+        faviRepository.transferBalanceToAnotherUser(targetEmail, requestAmount)
+
 }

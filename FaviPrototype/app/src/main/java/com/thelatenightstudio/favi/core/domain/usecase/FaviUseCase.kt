@@ -28,4 +28,9 @@ interface FaviUseCase {
 
     suspend fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>>
 
+    suspend fun transferBalanceToAnotherUser(
+        targetEmail: String,
+        requestAmount: Double
+    ): Flow<ApiResponse<Boolean>>
+
 }
