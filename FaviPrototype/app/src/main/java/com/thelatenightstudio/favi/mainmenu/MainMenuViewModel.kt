@@ -19,4 +19,7 @@ class MainMenuViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
     suspend fun getDataOfCurrentUser(): LiveData<ApiResponse<User>> =
         faviUseCase.getDataOfCurrentUser().asLiveData()
 
+    suspend fun getRealtimeUpdatesOfCurrentUser(): LiveData<ApiResponse<User>> =
+        faviUseCase.getRealtimeUpdatesOfCurrentUser().asLiveData()
+
 }

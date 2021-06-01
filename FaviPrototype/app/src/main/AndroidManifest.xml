@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
-        <activity android:name=".addfundmenu.AddFundActivity" />
+        <activity
+            android:name=".addfundmenu.AddFundActivity"
+            android:label="@string/request_fund" />
         <activity android:name=".transfermenu.TransferMenuActivity" />
         <activity
             android:name=".voicerecording.VoiceRecordingActivity"

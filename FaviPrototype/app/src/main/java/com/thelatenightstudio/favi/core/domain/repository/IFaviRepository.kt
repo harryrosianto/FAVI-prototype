@@ -30,4 +30,8 @@ interface IFaviRepository {
 
     suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>>
 
+    suspend fun increaseBalanceOfCurrentUser(requestAmount: Double): Flow<ApiResponse<Boolean>>
+
+    suspend fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>>
+
 }

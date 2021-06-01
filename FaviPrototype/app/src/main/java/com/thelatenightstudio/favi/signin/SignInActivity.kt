@@ -9,6 +9,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
+import com.thelatenightstudio.favi.core.utils.HideKeyboardHelper.hideKeyboard
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
 import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
@@ -80,6 +81,7 @@ class SignInActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignIn.isEnabled = isValid }
 
         binding.btnSignIn.setOnClickListener {
+            it.hideKeyboard()
             lifecycleScope.launch {
                 if (isConnected()) {
                     binding.progressBar.visibility = View.VISIBLE

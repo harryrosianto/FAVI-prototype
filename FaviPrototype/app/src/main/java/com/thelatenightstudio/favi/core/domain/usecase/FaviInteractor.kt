@@ -41,4 +41,10 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     override suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>> =
         faviRepository.getDataOfCurrentUser()
 
+    override suspend fun increaseBalanceOfCurrentUser(requestAmount: Double): Flow<ApiResponse<Boolean>> =
+        faviRepository.increaseBalanceOfCurrentUser(requestAmount)
+
+    override suspend fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>> =
+        faviRepository.getRealtimeUpdatesOfCurrentUser()
+
 }

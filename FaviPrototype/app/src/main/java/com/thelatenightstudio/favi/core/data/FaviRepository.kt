@@ -57,4 +57,12 @@ class FaviRepository(
     override suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>> =
         remoteDataSource.getDataOfCurrentUser()
 
+    @ExperimentalCoroutinesApi
+    override suspend fun increaseBalanceOfCurrentUser(requestAmount: Double): Flow<ApiResponse<Boolean>> =
+        remoteDataSource.increaseBalanceOfCurrentUser(requestAmount)
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>> =
+        remoteDataSource.getRealtimeUpdatesOfCurrentUser()
+
 }

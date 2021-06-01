@@ -23,6 +23,7 @@ class RemoteDataSource(
 
     companion object {
         const val USERS = "users"
+        const val BALANCE = "balance"
     }
 
     @ExperimentalCoroutinesApi
@@ -128,6 +129,53 @@ class RemoteDataSource(
             docRef.get().addOnCompleteListener(callback)
 
             awaitClose { }
+        }.flowOn(Dispatchers.IO)
+
+    @ExperimentalCoroutinesApi
+    fun increaseBalanceOfCurrentUser(requestAmount: Double): Flow<ApiResponse<Boolean>> =
+        callbackFlow {
+            val email = firebaseAuth.currentUser?.email ?: ""
+            val callback =
+                OnCompleteListener<Nothing> { task ->
+                    if (task.isSuccessful)
+                        trySend(ApiResponse.Success(task.isSuccessful))
+                    else
+                        trySend(ApiResponse.Error(task.exception?.message))
+                }
+
+            val docRef = firebaseFirestore.collection(USERS).document(email)
+            val transac = firebaseFirestore.runTransaction { transaction ->
+                val snapshot = transaction.get(docRef)
+                val balance = snapshot.getDouble(BALANCE)
+                val totalBalance = balance?.plus(requestAmount)
+                transaction.update(docRef, BALANCE, totalBalance)
+
+                null
+            }.addOnCompleteListener(callback)
+
+            awaitClose { }
+        }.flowOn(Dispatchers.IO)
+
+    @ExperimentalCoroutinesApi
+    fun getRealtimeUpdatesOfCurrentUser(): Flow<ApiResponse<User>> =
+        callbackFlow {
+            val email = firebaseAuth.currentUser?.email ?: ""
+            val docRef = firebaseFirestore.collection(USERS).document(email)
+            val listener = docRef.addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    trySend(ApiResponse.Error(e.message))
+                    return@addSnapshotListener
+                }
+
+                val user = snapshot?.toObject<User>()
+                if (snapshot != null && snapshot.exists() && user != null) {
+                    trySend(ApiResponse.Success(user))
+                } else {
+                    trySend(ApiResponse.Empty)
+                }
+            }
+
+            awaitClose { listener.remove() }
         }.flowOn(Dispatchers.IO)
 
 }

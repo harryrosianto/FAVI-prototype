@@ -1,5 +1,6 @@
 package com.thelatenightstudio.favi.di
 
+import com.thelatenightstudio.favi.addfundmenu.AddFundViewModel
 import com.thelatenightstudio.favi.core.domain.usecase.FaviInteractor
 import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
 import com.thelatenightstudio.favi.mainmenu.MainMenuViewModel
@@ -16,5 +17,6 @@ val viewModelModule = module {
     viewModel { SignUpViewModel(get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { MainMenuViewModel(get()) }
+    viewModel { AddFundViewModel(get()) }
 }
 

@@ -43,6 +43,8 @@
 
     <string name="request_fund">Request Fund</string>
     <string name="requested_fund_amount_IDR">Requested Fund Amount (IDR)</string>
+    <string name="requested_fund_error">Please input your requested fund!</string>
+    <string name="requested_fund_success">Your request is accepted!</string>
 
     <string name="bank_name">Bank Name</string>
     <string name="transfer_token_id">Receiver ID/Token</string>

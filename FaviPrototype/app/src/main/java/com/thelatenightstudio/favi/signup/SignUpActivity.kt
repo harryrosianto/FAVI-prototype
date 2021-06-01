@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
+import com.thelatenightstudio.favi.core.utils.HideKeyboardHelper.hideKeyboard
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
 import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ObservableHelper.getEmailStream
@@ -77,6 +78,7 @@ class SignUpActivity : AppCompatActivity() {
         invalidFieldsStream.subscribe { isValid -> binding.btnSignUp.isEnabled = isValid }
 
         binding.btnSignUp.setOnClickListener {
+            it.hideKeyboard()
             lifecycleScope.launch {
                 if (isConnected()) {
                     binding.progressBar.visibility = View.VISIBLE
