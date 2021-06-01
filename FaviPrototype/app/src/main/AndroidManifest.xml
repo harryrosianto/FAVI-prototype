@@ -33,7 +33,7 @@
             android:label="@string/main_menu" />
         <activity
             android:name=".home.HomeActivity"
-            android:label="@string/welcome_to_favi">
+            android:label="@string/favi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

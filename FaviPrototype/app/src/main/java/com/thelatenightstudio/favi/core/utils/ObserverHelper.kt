@@ -17,29 +17,28 @@ object ObserverHelper {
 
     fun AppCompatActivity.getSignInObserver(
         binding: ActivitySignInBinding
-    ) =
-        Observer<ApiResponse<Boolean>> { response ->
-            val toastText = when (response) {
-                is ApiResponse.Success -> {
-                    getString(R.string.successful)
-                }
-                is ApiResponse.Error -> {
-                    response.errorMessage
-                        ?: getString(R.string.error)
-                }
-                is ApiResponse.Empty -> {
-                    getString(R.string.empty)
-                }
+    ) = Observer<ApiResponse<Boolean>> { response ->
+        val toastText = when (response) {
+            is ApiResponse.Success -> {
+                getString(R.string.successful)
             }
-            lifecycleScope.launch {
-                showToast(toastText)
-                binding.progressBar.visibility = View.GONE
-
-                delay(1000)
-                if (response is ApiResponse.Success) {
-                    val intent = Intent(this@getSignInObserver, MainMenuActivity::class.java)
-                    startActivity(intent)
-                }
+            is ApiResponse.Error -> {
+                response.errorMessage
+                    ?: getString(R.string.error)
+            }
+            is ApiResponse.Empty -> {
+                getString(R.string.empty)
             }
         }
+        lifecycleScope.launch {
+            showToast(toastText)
+            binding.progressBar.visibility = View.GONE
+
+            delay(1000)
+            if (response is ApiResponse.Success) {
+                val intent = Intent(this@getSignInObserver, MainMenuActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 }

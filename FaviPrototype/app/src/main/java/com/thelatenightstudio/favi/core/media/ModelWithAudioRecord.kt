@@ -23,10 +23,6 @@ class ModelWithAudioRecord(private val context: Context) {
     var onStart: (() -> Unit)? = null
     var onStop: (() -> Unit)? = null
     var onAmpListener: ((Int) -> Unit)? = null
-        set(value) {
-//            recorder.onAmplitudeListener = value
-            field = value
-        }
 
     private var classifier: AudioClassifier? = null
     private var audioTensor: TensorAudio? = null

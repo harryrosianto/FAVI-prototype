@@ -1,6 +1,7 @@
 package com.thelatenightstudio.favi.core.domain.usecase
 
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
+import com.thelatenightstudio.favi.core.domain.model.User
 import com.thelatenightstudio.favi.core.domain.repository.IFaviRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -36,5 +37,8 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
 
     override suspend fun activateBiometric(): Boolean =
         faviRepository.activateBiometric()
+
+    override suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>> =
+        faviRepository.getDataOfCurrentUser()
 
 }

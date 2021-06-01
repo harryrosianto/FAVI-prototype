@@ -30,10 +30,11 @@
     <string name="zero_time">00:00</string>
     <string name="biometric_activated">Biometric has been activated!</string>
     <string name="biometric_deactivated">Biometric has been deactivated!</string>
-    <string name="welcome_to_favi">Welcome to FAVI</string>
+    <string name="favi">FAVI</string>
     <string name="main_menu">Main Menu</string>
 
-    <string name="user_name">Halo Dummy_User!</string>
+    <string name="username">Halo, dummy!</string>
+    <string name="username_format">Halo, %s!</string>
     <string name="user_cardview_text">Current Balance (IDR):</string>
     <string name="user_balance">12.000.000</string>
     <string name="transfer_fund">Transfer Fund</string>

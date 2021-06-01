@@ -14,4 +14,11 @@ object NumberHelper {
         }
     }
 
+    fun Double.formatAsBalance(): String {
+        return when (this % 1) {
+            0.0 -> this.toInt().toString()
+            else -> this.toString()
+        }
+    }
+
 }

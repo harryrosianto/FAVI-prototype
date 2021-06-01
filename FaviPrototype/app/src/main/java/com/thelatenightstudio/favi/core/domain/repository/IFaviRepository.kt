@@ -1,6 +1,7 @@
 package com.thelatenightstudio.favi.core.domain.repository
 
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
+import com.thelatenightstudio.favi.core.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface IFaviRepository {
@@ -26,5 +27,7 @@ interface IFaviRepository {
     suspend fun deleteTemporaryCredentialsFromSharedPref()
 
     suspend fun activateBiometric(): Boolean
+
+    suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>>
 
 }

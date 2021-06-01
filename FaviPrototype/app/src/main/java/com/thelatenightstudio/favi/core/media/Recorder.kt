@@ -72,6 +72,7 @@ class Recorder(context: Context) {
     fun release() {
         onStart = null
         onStop = null
+        onAmpListener = null
         recorder.onAmplitudeListener = null
     }
 

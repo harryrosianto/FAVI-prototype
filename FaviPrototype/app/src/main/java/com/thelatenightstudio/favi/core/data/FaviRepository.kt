@@ -3,6 +3,7 @@ package com.thelatenightstudio.favi.core.data
 import com.thelatenightstudio.favi.core.data.source.local.SharedPreferencesManager
 import com.thelatenightstudio.favi.core.data.source.remote.RemoteDataSource
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
+import com.thelatenightstudio.favi.core.domain.model.User
 import com.thelatenightstudio.favi.core.domain.repository.IFaviRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -51,5 +52,9 @@ class FaviRepository(
 
     override suspend fun activateBiometric(): Boolean =
         sharedPreferencesManager.activateBiometricAuth()
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>> =
+        remoteDataSource.getDataOfCurrentUser()
 
 }

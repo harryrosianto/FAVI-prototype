@@ -1,7 +1,7 @@
 package com.thelatenightstudio.favi.addfundmenu
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.thelatenightstudio.favi.R
 
 class AddFundActivity : AppCompatActivity() {

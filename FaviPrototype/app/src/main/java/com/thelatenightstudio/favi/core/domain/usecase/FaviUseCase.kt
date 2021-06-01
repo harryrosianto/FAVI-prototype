@@ -1,6 +1,7 @@
 package com.thelatenightstudio.favi.core.domain.usecase
 
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
+import com.thelatenightstudio.favi.core.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface FaviUseCase {
@@ -20,5 +21,7 @@ interface FaviUseCase {
     suspend fun isBiometricActive(): Boolean
 
     suspend fun activateBiometric(): Boolean
+
+    suspend fun getDataOfCurrentUser(): Flow<ApiResponse<User>>
 
 }

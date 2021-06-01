@@ -64,6 +64,7 @@ dependencies {
     //ui
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
     implementation 'com.github.imnirdst:iivisu:1.1.0'
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
 
     //sharedpref encryption
     implementation 'androidx.security:security-crypto:1.1.0-alpha01'
@@ -77,4 +78,10 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
     implementation 'org.tensorflow:tensorflow-lite-task-audio:0.2.0'
+
+    //remote data
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.0'
+
+    //performance debug
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
