@@ -13,6 +13,7 @@ import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.addfundmenu.AddFundActivity
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.domain.model.User
+import com.thelatenightstudio.favi.core.service.SignOutService
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
 import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.NumberHelper.formatAsBalance
@@ -126,9 +127,8 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
     override fun onDestroy() {
-        lifecycleScope.launch(IO) {
-            viewModel.signOut()
-        }
+        val signOutService = Intent(this@MainMenuActivity, SignOutService::class.java)
+        SignOutService.enqueueWork(this@MainMenuActivity, signOutService)
         super.onDestroy()
     }
 }

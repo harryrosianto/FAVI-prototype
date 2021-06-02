@@ -1,7 +1,5 @@
 package com.thelatenightstudio.favi.core.di
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -34,7 +32,6 @@ val repositoryModule = module {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.M)
 val mediaModule = module {
     single { Recorder(get()) }
     single { ModelWithAudioRecord(get()) }
