@@ -7,6 +7,7 @@ import com.thelatenightstudio.favi.mainmenu.MainMenuViewModel
 import com.thelatenightstudio.favi.signin.SignInViewModel
 import com.thelatenightstudio.favi.signup.SignUpViewModel
 import com.thelatenightstudio.favi.transfermenu.TransferMenuViewModel
+import com.thelatenightstudio.favi.voicerecording.VoiceRecordingViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -20,5 +21,6 @@ val viewModelModule = module {
     viewModel { MainMenuViewModel(get()) }
     viewModel { AddFundViewModel(get()) }
     viewModel { TransferMenuViewModel(get()) }
+    viewModel { VoiceRecordingViewModel(get()) }
 }
 

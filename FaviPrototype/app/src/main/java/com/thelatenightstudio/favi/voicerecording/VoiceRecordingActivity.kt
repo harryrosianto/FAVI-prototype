@@ -1,11 +1,11 @@
 package com.thelatenightstudio.favi.voicerecording
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.thelatenightstudio.favi.R
+import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.media.Recorder
 import com.thelatenightstudio.favi.core.utils.DrawableHelper.getDrawableCompat
 import com.thelatenightstudio.favi.core.utils.FileHelper.recordFile
@@ -13,8 +13,11 @@ import com.thelatenightstudio.favi.core.utils.NumberHelper.formatAsTime
 import com.thelatenightstudio.favi.core.utils.PermissionHelper.checkAudioPermission
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityVoiceRecordingBinding
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.sqrt
 
 class VoiceRecordingActivity : AppCompatActivity() {
@@ -25,6 +28,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVoiceRecordingBinding
     private val recorder: Recorder by inject()
+    private val viewModel: VoiceRecordingViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
@@ -57,8 +61,27 @@ class VoiceRecordingActivity : AppCompatActivity() {
                 timelineTextView.text = 0L.formatAsTime()
                 recordButton.icon = getDrawableCompat(R.drawable.ic_record_24)
 
-                Log.d("Cek", "listenOnRecorderStates: ${applicationContext.recordFile}")
-                lifecycleScope.launch { showToast("RECORD BERHASIL") }
+                lifecycleScope.launch {
+                    showToast(getString(R.string.voice_uploading))
+                    (IO){
+                        val filePath = applicationContext.recordFile.toString()
+                        viewModel.uploadFile(filePath)
+                    }.observe(this@VoiceRecordingActivity, { response ->
+                        val text = when (response) {
+                            is ApiResponse.Success -> {
+                                getString(R.string.voice_complete)
+                            }
+                            is ApiResponse.Error -> {
+                                response.errorMessage
+                                    ?: getString(R.string.error)
+                            }
+                            is ApiResponse.Empty -> {
+                                getString(R.string.empty)
+                            }
+                        }
+                        lifecycleScope.launch { showToast(text) }
+                    })
+                }
             }
             onAmpListener = {
                 runOnUiThread {

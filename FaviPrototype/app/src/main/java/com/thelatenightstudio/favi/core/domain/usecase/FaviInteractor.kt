@@ -53,4 +53,9 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     ): Flow<ApiResponse<Boolean>> =
         faviRepository.transferBalanceToAnotherUser(targetEmail, requestAmount)
 
+    override suspend fun uploadFile(
+        filePath: String
+    ): Flow<ApiResponse<Boolean>> =
+        faviRepository.uploadFile(filePath)
+
 }

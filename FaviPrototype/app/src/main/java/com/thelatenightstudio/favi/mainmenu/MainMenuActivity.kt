@@ -19,6 +19,7 @@ import com.thelatenightstudio.favi.core.utils.NumberHelper.formatAsBalance
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityMainMenuBinding
 import com.thelatenightstudio.favi.transfermenu.TransferMenuActivity
+import com.thelatenightstudio.favi.voicerecording.VoiceRecordingActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
@@ -60,6 +61,10 @@ class MainMenuActivity : AppCompatActivity() {
         }
         binding.btnBalanceTransfer.setOnClickListener {
             val intent = Intent(this, TransferMenuActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnVoiceRecording.setOnClickListener {
+            val intent = Intent(this, VoiceRecordingActivity::class.java)
             startActivity(intent)
         }
     }

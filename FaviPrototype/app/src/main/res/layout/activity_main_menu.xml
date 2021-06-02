@@ -160,7 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="@id/btn_user_data"
         app:layout_constraintTop_toBottomOf="@id/btn_add_fund">
 
@@ -188,7 +188,43 @@
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/white" />
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_voice_recording"
+        style="@style/Widget.FAVI.MainMenu.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_user_data"
+        app:layout_constraintTop_toBottomOf="@+id/btn_balance_transfer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_fingerprint"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:minLines="2"
+                android:text="@string/voice_recording"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
 

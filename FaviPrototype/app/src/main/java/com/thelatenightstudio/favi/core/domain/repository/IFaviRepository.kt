@@ -39,4 +39,6 @@ interface IFaviRepository {
         requestAmount: Double
     ): Flow<ApiResponse<Boolean>>
 
+    suspend fun uploadFile(filePath: String): Flow<ApiResponse<Boolean>>
+
 }

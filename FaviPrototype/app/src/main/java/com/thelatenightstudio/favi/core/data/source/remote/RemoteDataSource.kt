@@ -1,5 +1,6 @@
 package com.thelatenightstudio.favi.core.data.source.remote
 
+import android.net.Uri
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -8,6 +9,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.domain.model.User
 import kotlinx.coroutines.Dispatchers
@@ -16,10 +19,12 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
+import java.io.File
 
 class RemoteDataSource(
     private val firebaseAuth: FirebaseAuth,
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore,
+    private val userVoiceInputBucket: StorageReference
 ) {
 
     companion object {
@@ -241,5 +246,24 @@ class RemoteDataSource(
             null
         }.addOnCompleteListener(callback)
     }
+
+    @ExperimentalCoroutinesApi
+    fun uploadFile(filePath: String): Flow<ApiResponse<Boolean>> =
+        callbackFlow {
+            val fileName = "${firebaseAuth.currentUser?.email}.wav"
+            val uri = Uri.fromFile(File(filePath))
+            val voiceRecordingRef = userVoiceInputBucket.child(fileName)
+
+            val callback =
+                OnCompleteListener<UploadTask.TaskSnapshot> { task ->
+                    if (task.isSuccessful)
+                        trySend(ApiResponse.Success(task.isSuccessful))
+                    else
+                        trySend(ApiResponse.Error(task.exception?.message))
+                }
+            voiceRecordingRef.putFile(uri).addOnCompleteListener(callback)
+
+            awaitClose { }
+        }.flowOn(Dispatchers.IO)
 
 }

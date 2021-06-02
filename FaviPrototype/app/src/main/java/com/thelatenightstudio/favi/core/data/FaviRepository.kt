@@ -72,4 +72,10 @@ class FaviRepository(
     ): Flow<ApiResponse<Boolean>> =
         remoteDataSource.transferBalanceToAnotherUser(targetEmail, requestAmount)
 
+    @ExperimentalCoroutinesApi
+    override suspend fun uploadFile(
+        filePath: String
+    ): Flow<ApiResponse<Boolean>> =
+        remoteDataSource.uploadFile(filePath)
+
 }

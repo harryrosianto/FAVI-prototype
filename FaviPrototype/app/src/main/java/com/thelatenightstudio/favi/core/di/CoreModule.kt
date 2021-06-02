@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.thelatenightstudio.favi.core.data.FaviRepository
 import com.thelatenightstudio.favi.core.data.source.local.SharedPreferencesManager
 import com.thelatenightstudio.favi.core.data.source.remote.RemoteDataSource
@@ -20,11 +21,13 @@ val networkModule = module {
     single {
         FirebaseFirestore.getInstance()
     }
-
+    single {
+        FirebaseStorage.getInstance("gs://user_voice_input").reference
+    }
 }
 
 val repositoryModule = module {
-    single { RemoteDataSource(get(), get()) }
+    single { RemoteDataSource(get(), get(), get()) }
     single { SharedPreferencesManager(get()) }
     single<IFaviRepository> {
         FaviRepository(get(), get())

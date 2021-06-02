@@ -19,13 +19,13 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddFundActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddFundBinding
 
-    private val viewModel: AddFundViewModel by inject()
+    private val viewModel: AddFundViewModel by viewModel()
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
