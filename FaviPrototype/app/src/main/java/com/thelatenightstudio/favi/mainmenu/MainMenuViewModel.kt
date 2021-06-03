@@ -18,4 +18,7 @@ class MainMenuViewModel(private val faviUseCase: FaviUseCase) : ViewModel() {
     suspend fun getRealtimeUpdatesOfCurrentUser(): LiveData<ApiResponse<User>> =
         faviUseCase.getRealtimeUpdatesOfCurrentUser().asLiveData()
 
+    suspend fun uploadFile(filePath: String): LiveData<ApiResponse<Boolean>> =
+        faviUseCase.uploadFile(filePath).asLiveData()
+
 }
