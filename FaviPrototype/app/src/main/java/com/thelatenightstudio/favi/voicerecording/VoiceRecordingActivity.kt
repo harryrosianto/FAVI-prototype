@@ -9,6 +9,7 @@ import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.media.Recorder
 import com.thelatenightstudio.favi.core.utils.DrawableHelper.getDrawableCompat
 import com.thelatenightstudio.favi.core.utils.FileHelper.recordFile
+import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.NumberHelper.formatAsTime
 import com.thelatenightstudio.favi.core.utils.PermissionHelper.checkAudioPermission
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
@@ -66,7 +67,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
                     (IO){
                         val filePath = applicationContext.recordFile.toString()
                         viewModel.uploadFile(filePath)
-                    }.observe(this@VoiceRecordingActivity, { response ->
+                    }.observeOnce(this@VoiceRecordingActivity, { response ->
                         val text = when (response) {
                             is ApiResponse.Success -> {
                                 getString(R.string.voice_complete)

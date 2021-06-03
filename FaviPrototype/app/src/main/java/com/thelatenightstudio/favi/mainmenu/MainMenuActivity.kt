@@ -178,7 +178,7 @@ class MainMenuActivity : AppCompatActivity() {
                     (IO){
                         val filePath = applicationContext.recordFile.toString()
                         viewModel.uploadFile(filePath)
-                    }.observe(this@MainMenuActivity, { response ->
+                    }.observeOnce(this@MainMenuActivity, { response ->
                         val text = when (response) {
                             is ApiResponse.Success -> {
                                 getString(R.string.voice_complete)
