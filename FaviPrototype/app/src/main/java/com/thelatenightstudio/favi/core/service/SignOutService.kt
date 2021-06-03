@@ -3,7 +3,10 @@ package com.thelatenightstudio.favi.core.service
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.JobIntentService
-import com.google.firebase.auth.FirebaseAuth
+import com.thelatenightstudio.favi.core.domain.usecase.FaviUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class SignOutService : JobIntentService() {
@@ -15,9 +18,11 @@ class SignOutService : JobIntentService() {
         }
     }
 
-    private val firebaseAuth: FirebaseAuth by inject()
+    private val faviUseCase: FaviUseCase by inject()
 
     override fun onHandleWork(intent: Intent) {
-        firebaseAuth.signOut()
+        CoroutineScope(IO).launch {
+            faviUseCase.signOut()
+        }
     }
 }
