@@ -33,7 +33,7 @@ val repositoryModule = module {
 }
 
 val mediaModule = module {
-    single { Recorder(get()) }
+    factory { Recorder(get()) }
     single { ModelWithAudioRecord(get()) }
     single { Model(get()) }
 }

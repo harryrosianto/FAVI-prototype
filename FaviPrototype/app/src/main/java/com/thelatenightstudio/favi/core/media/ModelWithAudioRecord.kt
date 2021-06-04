@@ -50,7 +50,6 @@ class ModelWithAudioRecord(private val context: Context) {
         return this
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun toggleRecording() {
         isRecording = if (!isRecording) {
             startTime = System.currentTimeMillis()
@@ -66,7 +65,6 @@ class ModelWithAudioRecord(private val context: Context) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun classificationProcess() {
         // Define the classification runnable
         val run = object : Runnable {

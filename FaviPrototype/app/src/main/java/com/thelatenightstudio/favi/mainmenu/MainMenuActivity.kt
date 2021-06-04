@@ -155,8 +155,18 @@ class MainMenuActivity : AppCompatActivity() {
                     recorder.toggleRecording()
                 }
             }
+            return true
+
+        } else if (applicationInfo.targetSdkVersion >= Build.VERSION_CODES.ECLAIR) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event!!.isTracking
+                && !event.isCanceled
+            ) {
+                onBackPressed()
+                return true
+            }
         }
-        return true
+
+        return false
     }
 
     override fun onStart() {
