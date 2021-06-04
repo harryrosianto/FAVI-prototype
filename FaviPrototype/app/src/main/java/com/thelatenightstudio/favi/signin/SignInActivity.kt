@@ -82,16 +82,16 @@ class SignInActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener {
             it.hideKeyboard()
+            binding.progressBar.visibility = View.VISIBLE
             lifecycleScope.launch {
                 if (isConnected()) {
-                    binding.progressBar.visibility = View.VISIBLE
-
                     val email = binding.edEmail.text.toString()
                     val password = binding.edPassword.text.toString()
 
                     (IO){ viewModel.signIn(email, password) }
                         .observeOnce(this@SignInActivity, getSignInObserver(binding))
                 } else {
+                    binding.progressBar.visibility = View.GONE
                     showToast(getString(R.string.no_internet))
                 }
             }

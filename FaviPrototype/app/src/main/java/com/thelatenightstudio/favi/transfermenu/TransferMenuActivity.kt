@@ -63,16 +63,16 @@ class TransferMenuActivity : AppCompatActivity() {
 
         binding.btnConfirmTransfer.setOnClickListener {
             it.hideKeyboard()
+            binding.progressBar.visibility = View.VISIBLE
             lifecycleScope.launch {
                 if (isConnected()) {
-                    binding.progressBar.visibility = View.VISIBLE
-
                     val receiverId = binding.edReceiverId.text.toString()
                     val requestAmount = binding.edReceiverGetBalance.text.toString().toDouble()
 
                     (IO){ viewModel.transferBalanceToAnotherUser(receiverId, requestAmount) }
                         .observeOnce(this@TransferMenuActivity, getTransferBalanceObserver())
                 } else {
+                    binding.progressBar.visibility = View.GONE
                     showToast(getString(R.string.no_internet))
                 }
             }

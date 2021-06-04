@@ -11,7 +11,7 @@ import com.thelatenightstudio.favi.R
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.utils.EditTextHelper.showEditTextExistAlert
 import com.thelatenightstudio.favi.core.utils.HideKeyboardHelper.hideKeyboard
-import com.thelatenightstudio.favi.core.utils.InternetHelper
+import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
 import com.thelatenightstudio.favi.core.utils.LiveDataHelper.observeOnce
 import com.thelatenightstudio.favi.core.utils.ToastHelper.showToast
 import com.thelatenightstudio.favi.databinding.ActivityAddFundBinding
@@ -50,15 +50,15 @@ class AddFundActivity : AppCompatActivity() {
 
         binding.btnRequestFund.setOnClickListener {
             it.hideKeyboard()
+            binding.progressBar.visibility = View.VISIBLE
             lifecycleScope.launch {
-                if (InternetHelper.isConnected()) {
-                    binding.progressBar.visibility = View.VISIBLE
-
+                if (isConnected()) {
                     val requestAmount = binding.edRequestedFund.text.toString().toDouble()
 
                     (IO){ viewModel.increaseBalanceOfCurrentUser(requestAmount) }
                         .observeOnce(this@AddFundActivity, getIncreaseBalanceObserver())
                 } else {
+                    binding.progressBar.visibility = View.GONE
                     showToast(getString(R.string.no_internet))
                 }
             }

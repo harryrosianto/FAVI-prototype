@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +44,6 @@ class MainMenuActivity : AppCompatActivity() {
 
     private var upKeyCount = 0
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
@@ -85,7 +83,6 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun getDataObserver() =
         Observer<ApiResponse<User>> { response ->
             when (response) {
@@ -114,7 +111,6 @@ class MainMenuActivity : AppCompatActivity() {
             binding.progressBar.visibility = GONE
         }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun getRealtimeObserver() =
         Observer<ApiResponse<User>> { response ->
             when (response) {

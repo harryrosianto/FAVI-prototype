@@ -79,10 +79,9 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             it.hideKeyboard()
+            binding.progressBar.visibility = View.VISIBLE
             lifecycleScope.launch {
                 if (isConnected()) {
-                    binding.progressBar.visibility = View.VISIBLE
-
                     val email = binding.edEmail.text.toString()
                     val password = binding.edPassword.text.toString()
 
@@ -92,6 +91,7 @@ class SignUpActivity : AppCompatActivity() {
                         viewModel.createUser()
                     }.observeOnce(this@SignUpActivity, getCreateUserObservable())
                 } else {
+                    binding.progressBar.visibility = View.GONE
                     showToast(getString(R.string.no_internet))
                 }
             }

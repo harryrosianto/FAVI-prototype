@@ -48,13 +48,13 @@ object SignInBiometric {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
 
+                binding.progressBar.visibility = View.VISIBLE
                 lifecycleScope.launch {
                     if (isConnected()) {
-                        binding.progressBar.visibility = View.VISIBLE
-
                         (IO){ viewModel.signInWithBiometric() }
                             .observeOnce(this@getBiometricPrompt, getSignInObserver(binding))
                     } else {
+                        binding.progressBar.visibility = View.GONE
                         showToast(getString(R.string.no_internet))
                     }
                 }
