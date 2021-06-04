@@ -18,4 +18,10 @@
     <color name="red_300_medium">#FFe57373</color>
     <color name="red_300_dark">#FFaf4448</color>
 
+    <color name="red_700_medium">#d32f2f</color>
+    <color name="purple_700_medium">#7b1fa2</color>
+    <color name="light_blue_700_medium">#0288d1</color>
+    <color name="light_green_700_medium">#689f38</color>
+
+
 </resources>

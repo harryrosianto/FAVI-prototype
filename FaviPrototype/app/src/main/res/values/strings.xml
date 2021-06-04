@@ -33,7 +33,7 @@
     <string name="favi">FAVI</string>
     <string name="main_menu">Main Menu</string>
 
-    <string name="username">Halo, dummy!</string>
+    <string name="username">Halo, dummy! Si Lorem Ipsum Dolor Si jamet</string>
     <string name="username_format">Halo, %s!</string>
     <string name="user_cardview_text">Current Balance (IDR):</string>
     <string name="user_balance">12.000.000</string>

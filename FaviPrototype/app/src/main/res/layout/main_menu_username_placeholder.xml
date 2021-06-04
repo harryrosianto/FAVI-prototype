@@ -9,6 +9,8 @@
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="0dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:layout_height="wrap_content"
         android:background="#DDDDDD"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
