@@ -52,7 +52,7 @@
     <string name="confirm_transfer">Confirm Transfer</string>
     <string name="transfer_fund_error">Please input your transfer fund!</string>
     <string name="transfer_successful">Your transfer is accepted!</string>
-    <string name="add_fund_disclaimer">Note: The way this page currently work are for testing purpose only and not reflecting the vision of final product</string>
+    <string name="add_fund_disclaimer">Note: The way this page currently work is for "proof of concept" purpose only and not reflect how the product work in real situation</string>
 
     <string name="up_key_pressed_once">Press 2 more times to activate voice recording!</string>
     <string name="up_key_pressed_twice">Press 1 more times to activate voice recording!</string>

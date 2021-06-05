@@ -63,6 +63,8 @@
         style="@style/Widget.FAVI.PreLogin.Button"
         android:layout_marginBottom="8dp"
         android:text="@string/sign_in_with_voice"
+        app:icon="@drawable/ic_voice_record"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toTopOf="@+id/btn_biometric"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,6 +74,8 @@
         style="@style/Widget.FAVI.PreLogin.Button"
         android:layout_marginBottom="24dp"
         android:text="@string/sign_in_with_biometric"
+        app:icon="@drawable/ic_fingerprint"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
