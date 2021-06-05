@@ -36,6 +36,9 @@ class MainMenuActivity : AppCompatActivity() {
 
     companion object {
         private const val AUDIO_PERMISSION_REQUEST_CODE = 100
+
+        private const val TAMBAH = "tambah"
+        private const val TRANSFER = "transfer"
     }
 
     private lateinit var binding: ActivityMainMenuBinding
@@ -74,17 +77,25 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         binding.btnAddFund.setOnClickListener {
-            val intent = Intent(this, AddFundActivity::class.java)
-            startActivity(intent)
+            startAddFund()
         }
         binding.btnBalanceTransfer.setOnClickListener {
-            val intent = Intent(this, TransferMenuActivity::class.java)
-            startActivity(intent)
+            startTransfer()
         }
         binding.btnVoiceRecording.setOnClickListener {
             val intent = Intent(this, VoiceRecordingActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun startAddFund() {
+        val intent = Intent(this, AddFundActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startTransfer() {
+        val intent = Intent(this, TransferMenuActivity::class.java)
+        startActivity(intent)
     }
 
     private fun getDataObserver() =
@@ -140,7 +151,17 @@ class MainMenuActivity : AppCompatActivity() {
                                 resetPredictionService
                             )
 
-                            showToast(realtimeData.prediction)
+                            when (realtimeData.prediction) {
+                                TAMBAH -> {
+                                    startAddFund()
+                                }
+                                TRANSFER -> {
+                                    startTransfer()
+                                }
+                                else -> {
+                                    lifecycleScope.launch { showToast(getString(R.string.voice_error)) }
+                                }
+                            }
                         }
                 }
                 is ApiResponse.Error -> {

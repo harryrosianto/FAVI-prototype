@@ -59,5 +59,6 @@
     <string name="voice_is_being_recorded">Your voice is being recorded!</string>
     <string name="voice_processing">Please wait, your voice is being processed..</string>
     <string name="voice_complete">Your voice is successfully uploaded!</string>
+    <string name="voice_error">Error recognizing your command, please try again!</string>
 
 </resources>

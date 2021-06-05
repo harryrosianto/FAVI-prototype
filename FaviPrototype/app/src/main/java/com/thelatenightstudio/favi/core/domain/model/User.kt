@@ -4,5 +4,6 @@ data class User(
     var uid: String = "",
     val balance: Double = .0,
     var email: String = "",
-    var prediction: String = ""
+    var prediction: String = "",
+    var lastPrediction: String = ""
 )
