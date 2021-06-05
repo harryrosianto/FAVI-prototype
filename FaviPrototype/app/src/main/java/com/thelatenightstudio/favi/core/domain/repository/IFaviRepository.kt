@@ -41,4 +41,6 @@ interface IFaviRepository {
 
     suspend fun uploadFile(filePath: String): Flow<ApiResponse<Boolean>>
 
+    suspend fun resetPredictionFieldOfCurrentUser()
+
 }

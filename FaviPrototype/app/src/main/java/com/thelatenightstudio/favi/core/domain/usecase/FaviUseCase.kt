@@ -35,4 +35,6 @@ interface FaviUseCase {
 
     suspend fun uploadFile(filePath: String): Flow<ApiResponse<Boolean>>
 
+    suspend fun resetPredictionFieldOfCurrentUser()
+
 }

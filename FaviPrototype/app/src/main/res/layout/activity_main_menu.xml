@@ -8,13 +8,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_user_data"
-        android:backgroundTint="@color/teal_700_medium"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="match_parent"
         android:layout_height="190dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/teal_700_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,9 +29,9 @@
             <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="0dp"
-                android:singleLine="true"
-                android:ellipsize="marquee"
                 android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,18 +89,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_transfer_saldo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="@id/btn_user_data"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:background="@color/light_green_700_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:background="@color/light_green_700_medium"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="95dp"
@@ -128,18 +128,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_tambah_saldo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="@id/btn_user_data"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:background="@color/purple_700_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:background="@color/purple_700_medium"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="95dp"
@@ -165,21 +165,21 @@
         android:id="@+id/btn_activate_biometric"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
-        android:layout_marginBottom="16dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintStart_toStartOf="@id/btn_user_data"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="@id/btn_user_data">
 
         <LinearLayout
-            android:background="@color/light_blue_700_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:background="@color/light_blue_700_medium"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="95dp"
@@ -208,17 +208,17 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/btn_user_data"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintEnd_toEndOf="@+id/btn_user_data">
 
         <LinearLayout
-            android:background="@color/red_700_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:background="@color/red_700_medium"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="95dp"
@@ -239,5 +239,20 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <ProgressBar
+        android:id="@+id/voice_recording_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

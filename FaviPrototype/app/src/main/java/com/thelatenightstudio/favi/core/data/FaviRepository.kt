@@ -21,9 +21,8 @@ class FaviRepository(
     override suspend fun signIn(email: String, password: String): Flow<ApiResponse<Boolean>> =
         remoteDataSource.signIn(email, password)
 
-    override suspend fun signOut() {
+    override suspend fun signOut() =
         remoteDataSource.signOut()
-    }
 
     @ExperimentalCoroutinesApi
     override suspend fun getIdToken(): Flow<ApiResponse<String>> =
@@ -77,5 +76,8 @@ class FaviRepository(
         filePath: String
     ): Flow<ApiResponse<Boolean>> =
         remoteDataSource.uploadFile(filePath)
+
+    override suspend fun resetPredictionFieldOfCurrentUser() =
+        remoteDataSource.resetPredictionFieldOfCurrentUser()
 
 }

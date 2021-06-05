@@ -63,7 +63,7 @@ class VoiceRecordingActivity : AppCompatActivity() {
                 recordButton.icon = getDrawableCompat(R.drawable.ic_record_24)
 
                 lifecycleScope.launch {
-                    showToast(getString(R.string.voice_uploading))
+                    showToast(getString(R.string.voice_processing))
                     (IO){
                         val filePath = applicationContext.recordFile.toString()
                         viewModel.uploadFile(filePath)

@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FaviPrototype">
         <service
+            android:name=".core.service.ResetPredictionService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
             android:name=".core.service.SignOutService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />

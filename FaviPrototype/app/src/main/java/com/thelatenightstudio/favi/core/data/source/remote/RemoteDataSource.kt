@@ -30,6 +30,7 @@ class RemoteDataSource(
     companion object {
         const val USERS = "users"
         const val BALANCE = "balance"
+        const val PREDICTION = "prediction"
 
         const val BALANCE_NOT_ENOUGH = "You don't have enough balance to transfer!"
     }
@@ -265,5 +266,17 @@ class RemoteDataSource(
 
             awaitClose { }
         }.flowOn(Dispatchers.IO)
+
+    fun resetPredictionFieldOfCurrentUser() {
+        val email = firebaseAuth.currentUser?.email ?: ""
+
+        val docRef = firebaseFirestore.collection(USERS).document(email)
+        firebaseFirestore.runTransaction { transaction ->
+            val emptyString = ""
+            transaction.update(docRef, PREDICTION, emptyString)
+
+            null
+        }
+    }
 
 }

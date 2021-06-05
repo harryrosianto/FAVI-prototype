@@ -58,4 +58,7 @@ class FaviInteractor(private val faviRepository: IFaviRepository) : FaviUseCase 
     ): Flow<ApiResponse<Boolean>> =
         faviRepository.uploadFile(filePath)
 
+    override suspend fun resetPredictionFieldOfCurrentUser() =
+        faviRepository.resetPredictionFieldOfCurrentUser()
+
 }

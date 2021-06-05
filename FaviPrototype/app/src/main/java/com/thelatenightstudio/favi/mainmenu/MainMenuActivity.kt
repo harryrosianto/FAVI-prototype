@@ -14,6 +14,7 @@ import com.thelatenightstudio.favi.addfundmenu.AddFundActivity
 import com.thelatenightstudio.favi.core.data.source.remote.network.ApiResponse
 import com.thelatenightstudio.favi.core.domain.model.User
 import com.thelatenightstudio.favi.core.media.Recorder
+import com.thelatenightstudio.favi.core.service.ResetPredictionService
 import com.thelatenightstudio.favi.core.service.SignOutService
 import com.thelatenightstudio.favi.core.utils.FileHelper.recordFile
 import com.thelatenightstudio.favi.core.utils.InternetHelper.isConnected
@@ -43,6 +44,7 @@ class MainMenuActivity : AppCompatActivity() {
     private val recorder: Recorder by inject()
 
     private var upKeyCount = 0
+    private var waitingForPrediction = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,8 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         checkAudioPermission(AUDIO_PERMISSION_REQUEST_CODE)
+        val resetPredictionService = Intent(this, ResetPredictionService::class.java)
+        ResetPredictionService.enqueueWork(this, resetPredictionService)
 
         lifecycleScope.launch {
             if (isConnected()) {
@@ -124,6 +128,20 @@ class MainMenuActivity : AppCompatActivity() {
                         tvUserBalance.text =
                             realtimeData.balance.formatAsBalance()
                     }
+                    if (waitingForPrediction)
+                        lifecycleScope.launch {
+                            waitingForPrediction = false
+                            binding.voiceRecordingProgressBar.visibility = GONE
+
+                            val resetPredictionService =
+                                Intent(this@MainMenuActivity, ResetPredictionService::class.java)
+                            ResetPredictionService.enqueueWork(
+                                this@MainMenuActivity,
+                                resetPredictionService
+                            )
+
+                            showToast(realtimeData.prediction)
+                        }
                 }
                 is ApiResponse.Error -> {
                     val text =
@@ -180,24 +198,26 @@ class MainMenuActivity : AppCompatActivity() {
             }
             onStop = {
                 lifecycleScope.launch {
-                    showToast(getString(R.string.voice_uploading))
+                    showToast(getString(R.string.voice_processing))
+                    binding.voiceRecordingProgressBar.visibility = VISIBLE
                     (IO){
                         val filePath = applicationContext.recordFile.toString()
                         viewModel.uploadFile(filePath)
                     }.observeOnce(this@MainMenuActivity, { response ->
-                        val text = when (response) {
+                        when (response) {
                             is ApiResponse.Success -> {
-                                getString(R.string.voice_complete)
+                                waitingForPrediction = true
                             }
                             is ApiResponse.Error -> {
-                                response.errorMessage
+                                val text = response.errorMessage
                                     ?: getString(R.string.error)
+                                lifecycleScope.launch { showToast(text) }
                             }
                             is ApiResponse.Empty -> {
-                                getString(R.string.empty)
+                                val text = getString(R.string.empty)
+                                lifecycleScope.launch { showToast(text) }
                             }
                         }
-                        lifecycleScope.launch { showToast(text) }
                     })
                 }
             }
