@@ -10,11 +10,9 @@
         android:id="@+id/btn_user_data"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/teal_700_medium"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_fund"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -86,19 +84,19 @@
         android:id="@+id/btn_balance_transfer"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_transfer_saldo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_voice_recording"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/btn_user_data"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="@id/btn_voice_recording"
+        app:layout_constraintStart_toStartOf="@id/btn_voice_recording">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/light_green_700_medium"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -125,19 +123,18 @@
         android:id="@+id/btn_add_fund"
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_tambah_saldo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_activate_biometric"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintStart_toStartOf="@id/btn_user_data"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="@id/btn_activate_biometric"
+        app:layout_constraintStart_toStartOf="@id/btn_activate_biometric">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/purple_700_medium"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -166,18 +163,17 @@
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintStart_toStartOf="@id/btn_user_data">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/light_blue_700_medium"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -205,18 +201,17 @@
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/btn_user_data">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/red_700_medium"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -248,6 +243,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
