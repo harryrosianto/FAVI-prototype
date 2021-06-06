@@ -13,7 +13,7 @@ Function dependencies used in this project:
 - google-api-python-client 2.7.0
 
 ### Dataset use
-Favi Speech Commands Dataset (id). This dataset consists of over 5,800 WAV audio files of people saying 29 different words. This data was collected by The Late Nite Studio Team.
+Favi Speech Commands Dataset (id). This dataset consists of over 5,800 WAV audio files of people saying 29 different words in Bahasa. This data was collected by The Late Nite Studio Team.
 
 Link to the dataset:
 
