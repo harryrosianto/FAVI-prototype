@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_double"
         android:text="@string/zero_time"
-        android:textColor="?attr/colorPrimaryVariant"
+        android:textColor="?attr/colorSecondaryVariant"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/record_button"
         app:layout_constraintEnd_toEndOf="parent"

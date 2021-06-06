@@ -26,9 +26,9 @@
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
         <item name="iconPadding">0dp</item>
-        <item name="iconSize">32dp</item>
+        <item name="iconSize">70dp</item>
         <item name="iconGravity">textStart</item>
-        <item name="strokeColor">?attr/colorPrimaryVariant</item>
+        <item name="strokeColor">?attr/colorSecondaryVariant</item>
     </style>
 
     <style name="IIVisuApp.ShapeAppearanceOverlay.Button.Circle" parent="">

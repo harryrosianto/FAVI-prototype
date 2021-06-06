@@ -53,12 +53,13 @@
     <string name="transfer_fund_error">Please input your transfer fund!</string>
     <string name="transfer_successful">Your transfer is accepted!</string>
     <string name="add_fund_disclaimer">Note: The way this page currently work is for "proof of concept" purpose only and not reflect how the product work in real situation</string>
+    <string name="main_menu_tips">Tips: Press Volume Up 3x to activate Voice Command</string>
 
-    <string name="up_key_pressed_once">Press 2 more times to activate voice recording!</string>
-    <string name="up_key_pressed_twice">Press 1 more times to activate voice recording!</string>
+    <string name="up_key_pressed_once">Press 2 more times to activate Voice Command!</string>
+    <string name="up_key_pressed_twice">Press 1 more times to activate Voice Command!</string>
     <string name="voice_is_being_recorded">Your voice is being recorded!</string>
     <string name="voice_processing">Please wait, your voice is being processed..</string>
     <string name="voice_complete">Your voice is successfully uploaded!</string>
-    <string name="voice_error">Error recognizing your command, please try again!</string>
+    <string name="voice_error">Error recognizing your Command, please try again!</string>
 
 </resources>

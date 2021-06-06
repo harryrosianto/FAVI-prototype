@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_add_fund"
+        app:layout_constraintBottom_toTopOf="@id/tv_main_menu_tips"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -80,44 +80,24 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/btn_balance_transfer"
-        style="@style/Widget.FAVI.MainMenu.Button"
+    <TextView
+        android:id="@+id/tv_main_menu_tips"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/cd_transfer_saldo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_voice_recording"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/btn_voice_recording"
-        app:layout_constraintStart_toStartOf="@id/btn_voice_recording">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_balance_transfer"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:minLines="2"
-                android:text="@string/transfer_fund"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="@color/white" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        android:ellipsize="marquee"
+        android:gravity="start"
+        android:singleLine="true"
+        android:text="@string/main_menu_tips"
+        android:textAlignment="center"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_fund"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_add_fund"
@@ -153,6 +133,45 @@
                 android:gravity="center"
                 android:minLines="2"
                 android:text="@string/add_fund"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_balance_transfer"
+        style="@style/Widget.FAVI.MainMenu.Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/cd_transfer_saldo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_voice_recording"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/btn_voice_recording"
+        app:layout_constraintStart_toStartOf="@id/btn_voice_recording">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_balance_transfer"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:minLines="2"
+                android:text="@string/transfer_fund"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/white" />
         </LinearLayout>

@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="@string/requested_fund_amount_IDR"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_requested_fund"
@@ -28,15 +28,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/til_requested_fund"
-        app:layout_constraintStart_toStartOf="@id/til_requested_fund"
-        app:layout_constraintEnd_toEndOf="@id/til_requested_fund"
         android:text="@string/add_fund_disclaimer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="@id/til_requested_fund"
+        app:layout_constraintStart_toStartOf="@id/til_requested_fund"
+        app:layout_constraintTop_toBottomOf="@+id/til_requested_fund" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -55,15 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:elevation="2dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_request_fund"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
