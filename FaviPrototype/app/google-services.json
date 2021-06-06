@@ -7,36 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:841439737827:android:86aa704b4fb320f54612d6",
-        "android_client_info": {
-          "package_name": "com.thelatenightstudio.favi"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "841439737827-77lf9mhk1f0l2ekk7vqtr3mk4v8q2gd5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBw_Bbbgm9-z7kgpJhXzJrsoUecrhWeHd8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "841439737827-77lf9mhk1f0l2ekk7vqtr3mk4v8q2gd5.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:841439737827:android:35b8f42269875aca4612d6",
+        "mobilesdk_app_id": "1:841439737827:android:6fc8f05616e223424612d6",
         "android_client_info": {
           "package_name": "com.thelatenightstudio.myapplication"
         }
