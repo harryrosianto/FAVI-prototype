@@ -36,3 +36,23 @@ Data generation involves producing raw PCM wavform data containing a desired num
 
 * [Keras](https://keras.io/) - Deep Learning Framework
 * [TensorFlow](http://tensorflow.org/) - Machine Learning Library
+
+### Results
+After the training the model for 100 epochs, the following confusion matrix was generated for assessing classification performance.
+
+`Test loss: 0.3564938008785248, test accuracy: 93.12499761581421`
+| Predicted     | sembilan     | tiga   | tujuh  | satu   | delapan  | enam   | tambah  | transfer  | lima   | empat   | nol  | dua |
+| ------------- |:-------------:| ------:| ---:| ------:| ---:| -----:| ----:| -------:| -------:| ------:| ----:|-----:|
+| Actual |
+sembilan | 42 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+tiga | 0 | 46 | 0 | 0 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0
+tujuh | 0 | 0 | 36 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+satu | 0 | 1 | 1 | 40 | 0 | 0 | 0 | 1 | 0 | 0 | 2 | 0
+delapan | 0 | 0 | 0 | 0 | 36 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+enam | 0 | 0 | 0 | 0 | 1 | 35 | 0 | 0 | 2 | 0 | 0 | 0
+tambah | 0 | 0 | 0 | 0 | 0 | 2 | 35 | 0 | 0 | 1 | 0 | 0
+transfer | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 32 | 0 | 0 | 0 | 0
+lima | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | 0 | 2 | 0
+empat | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 44 | 0 | 1
+nol | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 32 | 0
+dua | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 3 | 35
