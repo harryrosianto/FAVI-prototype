@@ -9,12 +9,13 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_user_data"
         style="@style/Widget.FAVI.MainMenu.Button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@id/tv_main_menu_tips"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_voice_recording"
+        app:layout_constraintStart_toStartOf="@id/btn_activate_biometric"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,8 +31,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +43,6 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/user_cardview_text"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/white"
@@ -54,9 +55,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -84,9 +84,7 @@
         android:id="@+id/tv_main_menu_tips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
         android:ellipsize="marquee"
         android:gravity="start"
         android:singleLine="true"
@@ -96,8 +94,8 @@
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_add_fund"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/btn_voice_recording"
+        app:layout_constraintStart_toStartOf="@id/btn_activate_biometric" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_add_fund"
@@ -182,11 +180,11 @@
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@id/btn_voice_recording"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
@@ -220,12 +218,12 @@
         style="@style/Widget.FAVI.MainMenu.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/cd_aktifkan_fitur_sidik_jari"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_activate_biometric">
 
         <LinearLayout
             android:layout_width="match_parent"
