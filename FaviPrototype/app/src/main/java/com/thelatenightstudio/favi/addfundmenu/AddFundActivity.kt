@@ -38,7 +38,6 @@ class AddFundActivity : AppCompatActivity() {
         private const val AUDIO_PERMISSION_REQUEST_CODE = 100
 
         private const val TAMBAH = "tambah"
-        private const val TRANSFER = "transfer"
     }
 
     private lateinit var binding: ActivityAddFundBinding
@@ -140,7 +139,11 @@ class AddFundActivity : AppCompatActivity() {
 
                             val convertedPrediction = realtimeData.prediction.toNumber()
                             if (convertedPrediction == NOT_A_NUMBER)
-                                showToast(getString(R.string.voice_error))
+                                if (realtimeData.prediction == TAMBAH) {
+                                    binding.btnRequestFund.performClick()
+                                } else {
+                                    showToast(getString(R.string.voice_error))
+                                }
                             else {
                                 with(binding.edRequestedFund) {
                                     val newText = "${text.toString()}$convertedPrediction"
