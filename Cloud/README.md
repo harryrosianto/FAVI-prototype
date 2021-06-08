@@ -37,8 +37,8 @@ gcloud functions deploy hello_gcs \
 ## Store the Prediction in to Firestore
 
 add this file below in to main.py  
-
-
+  
+  
 from google.cloud import firestore
 
 fname=audio_file.replace('/tmp/','')  
