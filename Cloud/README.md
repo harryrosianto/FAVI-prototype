@@ -36,15 +36,15 @@ gcloud functions deploy hello_gcs \
 
 ## Store the Prediction in to Firestore
 
----add this file below in to main.py---  
+add this file below in to main.py  
 
 from google.cloud import firestore  
-fname=audio_file.replace('/tmp/','')
-    output_fname=str(fname.replace('.wav',''))
-    db = firestore.Client()
-    doc_ref = db.collection(u'users').document(output_fname)
-    doc_ref.update({
-    u'prediction': prediction,
-    u'lastPrediction': prediction,
-    })
+fname=audio_file.replace('/tmp/','')  
+    output_fname=str(fname.replace('.wav',''))  
+    db = firestore.Client()  
+    doc_ref = db.collection(u'users').document(output_fname)  
+    doc_ref.update({  
+    u'prediction': prediction,  
+    u'lastPrediction': prediction,  
+    })  
 
