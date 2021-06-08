@@ -40,7 +40,6 @@ add this file below in to main.py
   
   
 from google.cloud import firestore
-
 fname=audio_file.replace('/tmp/','')  
     output_fname=str(fname.replace('.wav',''))  
     db = firestore.Client()  
