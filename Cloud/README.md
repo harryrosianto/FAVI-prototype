@@ -14,7 +14,7 @@ https://console.cloud.google.com/storage/browser/financial_speech_dataset_id
 CLOUD_PROJECT = 'your-project-id-here'  
 BUCKET_NAME = 'favi-models'  
 !gcloud config set project $CLOUD_PROJECT  
-!gsutil mb $BUCKET  
+!gsutil mb $BUCKET_NAME  
 model.save(BUCKET_NAME, save_format='tf')  
 MODEL = 'favi_speech_model'  
 !gcloud ai-platform models create $MODEL --regions=asia-southeast1  
