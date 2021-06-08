@@ -1,6 +1,7 @@
-# Financial Assistant for Visually Impaired
-An android app development project for the capstone project of Bangkit Academy
+# Create Deployment from Cloud Storage Trigger
 
-### Executive Summary:
-
-This project aims to solve the issues of accessibility in accessing financial services faced by 3.5 Million People in Indonesia with impaired visibility. We want to tackle this problem because we want visually impaired people to have easier access to financial services.
+bash
+gcloud functions deploy hello_gcs \
+--runtime python37 \
+--trigger-resource user_voice_input \
+--trigger-event google.storage.object.finalize
