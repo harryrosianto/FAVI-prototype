@@ -20,11 +20,7 @@ BUCKET_NAME = 'favi-models'
 ```
 ```
 !gcloud config set project $CLOUD_PROJECT
-```
-```
 !gsutil mb $BUCKET_NAME
-```
-```
 model.save(BUCKET_NAME, save_format='tf')
 ```
 ```
@@ -32,11 +28,7 @@ MODEL = 'favi_speech_model'
 ```
 ```
 !gcloud ai-platform models create $MODEL --regions=asia-southeast1
-```
-```
 VERSION = 'v1'
-```
-```
 MODEL_DIR = BUCKET_NAME
 ```
 
