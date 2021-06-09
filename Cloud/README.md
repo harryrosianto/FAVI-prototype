@@ -12,7 +12,8 @@ https://console.cloud.google.com/storage/browser/financial_speech_dataset_id
 
 ## Deploy Models on AI Platform and Save the Model in to Cloud Storage
 
-```CLOUD_PROJECT = 'your-project-id-here'  
+```
+CLOUD_PROJECT = 'your-project-id-here'  
 BUCKET_NAME = 'favi-models'  
 !gcloud config set project $CLOUD_PROJECT  
 !gsutil mb $BUCKET_NAME  
