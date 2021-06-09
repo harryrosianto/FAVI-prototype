@@ -24,7 +24,8 @@ VERSION = 'v1'
 MODEL_DIR = BUCKET_NAME
 ```
 
-```!gcloud ai-platform versions create $VERSION \
+```
+!gcloud ai-platform versions create $VERSION \
   --model $MODEL \
   --origin $MODEL_DIR \
   --runtime-version=2.1 \
@@ -34,7 +35,8 @@ MODEL_DIR = BUCKET_NAME
 
 ## Create Deployment from Cloud Storage Trigger
 
-```gcloud functions deploy hello_gcs \
+```
+gcloud functions deploy hello_gcs \
 --runtime python37 \
 --trigger-resource user_voice_input \
 --trigger-event google.storage.object.finalize
@@ -43,7 +45,8 @@ MODEL_DIR = BUCKET_NAME
 
 add this code below in to main.py  
   
-```from google.cloud import firestore
+```
+from google.cloud import firestore
 fname=audio_file.replace('/tmp/','')  
     output_fname=str(fname.replace('.wav',''))  
     db = firestore.Client()  
